@@ -2,7 +2,6 @@ name: CI
 
 on:
   workflow_dispatch:
-
 # Least-privilege default for any inline job in this file. The reusable
 # workflows invoked below declare their own permissions; this top-level
 # block only applies to direct jobs in ci.yml itself.
@@ -30,53 +29,6 @@ permissions:
 # called workflow's own `contents: read` declaration and break checkout.
 # `contents: read` matches what each called workflow needs.
 jobs:
-  full-build:
-    name: Default Build (all configured targets)
-    runs-on: macos-latest
-    permissions:
-      contents: read
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v6
-
-      - name: Set up JDK 21
-        uses: actions/setup-java@v5.2.0
-        with:
-          distribution: zulu
-          java-version: '21'
-
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v6.1.0
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v6.4.0
-        with:
-          node-version: '24'
-          check-latest: true
-
-      - name: Set up Yarn
-        run: |
-          corepack enable
-          corepack prepare yarn@1.22.22 --activate
-
-      - name: Build default all-target gate
-        env:
-          ARCHS: arm64
-          BUILT_PRODUCTS_DIR: ${{ github.workspace }}/build/xcode-swift-export
-          CONFIGURATION: Debug
-          DEPLOYMENT_TARGET_SETTING_NAME: MACOSX_DEPLOYMENT_TARGET
-          FRAMEWORKS_FOLDER_PATH: Frameworks
-          MACOSX_DEPLOYMENT_TARGET: "14.0"
-          ORG_GRADLE_PROJECT_kotlin_js_yarn_download: "false"
-          SDK_NAME: macosx
-          TARGET_BUILD_DIR: ${{ github.workspace }}/build/xcode-swift-export
-        run: >
-          ./gradlew
-          build
-          -PKOTLIN_FRAMEWORK_BUILD_TYPE=debug
-          --max-workers=1
-          --no-configuration-cache
-
   ios:
     uses: ./.github/workflows/ios.yml
     permissions:
