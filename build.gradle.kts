@@ -234,9 +234,6 @@ kotlin {
         binaries.framework { baseName = "IcuLocaleCore"; xcf.add(this) }
     }
 
-    watchosArm32 {
-        binaries.framework { baseName = "IcuLocaleCore"; xcf.add(this) }
-    }
     watchosArm64 {
         binaries.framework { baseName = "IcuLocaleCore"; xcf.add(this) }
     }
@@ -326,11 +323,11 @@ tasks.withType<AbstractTestTask>().configureEach {
 }
 
 rootProject.extensions.configure<NodeJsEnvSpec>("kotlinNodeJsSpec") {
-    version.set("24.15.0")
+    version.set("24.16.0")
 }
 
 rootProject.extensions.configure<WasmNodeJsEnvSpec>("kotlinWasmNodeJsSpec") {
-    version.set("24.15.0")
+    version.set("24.16.0")
 }
 
 rootProject.extensions.configure<YarnRootEnvSpec>("kotlinYarnSpec") {
@@ -364,8 +361,8 @@ rootProject.extensions.configure<YarnRootExtension>("kotlinYarn") {
     resolution("**/minimatch", "10.2.5")
     resolution("picomatch", "4.0.4")
     resolution("**/picomatch", "4.0.4")
-    resolution("qs", "6.15.1")
-    resolution("**/qs", "6.15.1")
+    resolution("qs", "6.15.2")
+    resolution("**/qs", "6.15.2")
     resolution("socket.io-parser", "4.2.6")
     resolution("**/socket.io-parser", "4.2.6")
     resolution("ws", "8.20.1")
@@ -506,8 +503,6 @@ val fullTargetBuildTaskNames = setOf(
     "tvosArm64TestBinaries",
     "tvosSimulatorArm64Binaries",
     "tvosSimulatorArm64TestBinaries",
-    "watchosArm32Binaries",
-    "watchosArm32TestBinaries",
     "watchosArm64Binaries",
     "watchosArm64TestBinaries",
     "watchosDeviceArm64Binaries",
