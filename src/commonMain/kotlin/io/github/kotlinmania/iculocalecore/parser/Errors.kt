@@ -74,3 +74,6 @@ enum class ParseError(val message: String) {
 
     override fun toString(): String = message
 }
+
+/** Wraps a [ParseError] so it can be used with Kotlin's [Result] type. */
+class ParseException(val error: ParseError) : Exception(error.message)
