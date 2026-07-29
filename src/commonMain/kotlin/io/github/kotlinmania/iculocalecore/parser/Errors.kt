@@ -12,7 +12,9 @@ package io.github.kotlinmania.iculocalecore.parser
  *
  * This enum is non-exhaustive: new variants may be added in future releases.
  */
-enum class ParseError(val message: String) {
+enum class ParseError(
+    val message: String,
+) {
     /**
      * Invalid language subtag.
      *
@@ -70,7 +72,8 @@ enum class ParseError(val message: String) {
      * )
      * ```
      */
-    DuplicatedExtension("Duplicated extension");
+    DuplicatedExtension("Duplicated extension"),
+    ;
 
     override fun toString(): String = message
 }
