@@ -12,11 +12,14 @@ package io.github.kotlinmania.iculocalecore.preferences.extensions.unicode
  *
  * This enum is non-exhaustive: new variants may be added in future releases.
  */
-enum class PreferencesParseError(val message: String) {
+enum class PreferencesParseError(
+    val message: String,
+) {
     /**
      * The given keyword value is not a valid preference variant.
      */
-    InvalidKeywordValue("The given keyword value is not a valid preference variant.");
+    InvalidKeywordValue("The given keyword value is not a valid preference variant."),
+    ;
 
     override fun toString(): String = message
 }
