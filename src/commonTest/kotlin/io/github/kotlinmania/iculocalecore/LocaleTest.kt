@@ -1,0 +1,98 @@
+// port-lint: tests locale.rs, extensions/mod.rs, parser/locale.rs
+package io.github.kotlinmania.iculocalecore
+
+import io.github.kotlinmania.iculocalecore.extensions.unicode.Key
+import io.github.kotlinmania.iculocalecore.extensions.unicode.Value
+import io.github.kotlinmania.iculocalecore.subtags.Language
+import io.github.kotlinmania.iculocalecore.subtags.Region
+import io.github.kotlinmania.iculocalecore.subtags.Script
+import kotlin.test.Test
+import kotlin.test.assertEquals
+import kotlin.test.assertFalse
+import kotlin.test.assertTrue
+
+class LocaleTest {
+    @Test
+    fun parseSimpleLocale() {
+        val loc = Locale.parse("en-US").getOrThrow()
+        assertEquals(Language.parse("en").getOrThrow(), loc.id.language)
+        assertEquals(null, loc.id.script)
+        assertEquals(Region.parse("US").getOrThrow(), loc.id.region)
+        assertTrue(loc.extensions.isEmpty())
+    }
+
+    @Test
+    fun parseLocaleWithUnicodeExtension() {
+        val loc = Locale.parse("en-US-u-ca-buddhist").getOrThrow()
+        assertEquals("en-US-u-ca-buddhist", loc.toString())
+        val key = Key.parse("ca").getOrThrow()
+        assertEquals(Value.parse("buddhist").getOrThrow(), loc.extensions.unicode.keywords.get(key))
+    }
+
+    @Test
+    fun parseLocaleWithExtensions() {
+        val loc = Locale.parse("en-US-u-ca-buddhist-t-en-us-h0-hybrid-x-foo").getOrThrow()
+        assertEquals("en-US-t-en-us-h0-hybrid-u-ca-buddhist-x-foo", loc.toString())
+        assertFalse(loc.extensions.isEmpty())
+    }
+
+    @Test
+    fun parseUndWithExtensions() {
+        val loc = Locale.parse("und-a-foo-t-foo-u-foo-w-foo-z-foo-x-foo").getOrThrow()
+        assertEquals("und-a-foo-t-foo-u-foo-w-foo-z-foo-x-foo", loc.toString())
+    }
+
+    @Test
+    fun unknownLocale() {
+        assertEquals("und", Locale.UNKNOWN.toString())
+        assertTrue(Locale.UNKNOWN.extensions.isEmpty())
+    }
+
+    @Test
+    fun parseNormalize() {
+        val result = Locale.normalize("pL-latn-pl-U-HC-H12")
+        assertEquals("pl-Latn-PL-u-hc-h12", result.getOrThrow())
+    }
+
+    @Test
+    fun normalizingEq() {
+        val loc = Locale.parse("en-US-u-ca-buddhist").getOrThrow()
+        assertTrue(loc.normalizingEq("en-US-u-ca-buddhist"))
+        assertTrue(loc.normalizingEq("EN-us-U-ca-buddhist"))
+        assertFalse(loc.normalizingEq("en-US"))
+    }
+
+    @Test
+    fun normalizingEqTrailingChars() {
+        val loc = Locale.parse("en").getOrThrow()
+        assertFalse(loc.normalizingEq("en-US"))
+    }
+
+    @Test
+    fun conversions() {
+        val locale = Locale.UNKNOWN
+        val langid = locale.id
+        val locale2 = langid.toLocale()
+        assertEquals(locale, locale2)
+    }
+
+    @Test
+    fun parseComplexLocale() {
+        val loc = Locale.parse("eN-latn-Us-Valencia-u-hC-H12").getOrThrow()
+        assertEquals(Language.parse("en").getOrThrow(), loc.id.language)
+        assertEquals(Script.parse("Latn").getOrThrow(), loc.id.script)
+        assertEquals(Region.parse("US").getOrThrow(), loc.id.region)
+    }
+
+    @Test
+    fun duplicatedExtensionFails() {
+        assertTrue(Locale.parse("und-u-hc-h12-u-ca-calendar").isFailure)
+    }
+
+    @Test
+    fun fromLanguage() {
+        val lang = Language.parse("en").getOrThrow()
+        val loc = lang.toLocale()
+        assertEquals("en", loc.toString())
+    }
+}

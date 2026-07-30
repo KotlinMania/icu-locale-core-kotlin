@@ -53,6 +53,9 @@ data class Subtag(val value: String) : Comparable<Subtag> {
             val s = codeUnits.decodeToString()
             return tryFromStr(s)
         }
+
+        /** Returns whether the byte array is a valid key (2-8 characters). */
+        fun validKey(v: ByteArray): Boolean = v.size in 2..8
     }
 
     /** Returns the length of this subtag. */
