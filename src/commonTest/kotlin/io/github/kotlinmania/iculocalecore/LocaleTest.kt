@@ -99,4 +99,48 @@ class LocaleTest {
         val loc = lang.toLocale()
         assertEquals("en", loc.toString())
     }
+
+    @Test
+    fun fromScript() {
+        val script = Script.parse("Latn").getOrThrow()
+        val loc = script.toLocale()
+        assertEquals("und-Latn", loc.toString())
+    }
+
+    @Test
+    fun fromRegion() {
+        val region = Region.parse("US").getOrThrow()
+        val loc = region.toLocale()
+        assertEquals("und-US", loc.toString())
+    }
+
+    @Test
+    fun strictCmp() {
+        val loc = Locale.parse("en-US").getOrThrow()
+        assertEquals(0, loc.strictCmp("en-US".encodeToByteArray()))
+        assertTrue(loc.strictCmp("en-GB".encodeToByteArray()) > 0)
+    }
+
+    @Test
+    fun totalCmp() {
+        val a = Locale.parse("en-US-u-ca-buddhist").getOrThrow()
+        val b = Locale.parse("en-US-u-ca-hebrew").getOrThrow()
+        assertTrue(a.totalCmp(b) < 0)
+        assertTrue(b.totalCmp(a) > 0)
+        assertEquals(0, a.totalCmp(a))
+    }
+
+    @Test
+    fun forEachSubtagStr() {
+        val loc = Locale.parse("en-Latn-US-valencia-u-ca-buddhist").getOrThrow()
+        val subtags = mutableListOf<String>()
+        loc.forEachSubtagStr { subtags.add(it) }
+        assertEquals(listOf("en", "Latn", "US", "valencia", "u", "ca", "buddhist"), subtags)
+    }
+
+    @Test
+    fun normalizeUtf8() {
+        val result = Locale.normalizeUtf8("pL-latn-pl-U-HC-H12".encodeToByteArray())
+        assertEquals("pl-Latn-PL-u-hc-h12", result.getOrThrow())
+    }
 }
