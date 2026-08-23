@@ -3,13 +3,11 @@ package io.github.kotlinmania.iculocalecore
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
-import io.github.kotlinmania.iculocalecore.subtags.Variant
-import io.github.kotlinmania.iculocalecore.subtags.Variants
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
 import kotlin.test.assertNull
+import kotlin.test.assertTrue
 
 class LanguageIdentifierTest {
     @Test

@@ -28,7 +28,9 @@ const val PRIVATE_EXT_STR: String = "x"
  * assertEquals(private_.toString(), "x-foo-bar")
  * ```
  */
-data class Private(val inner: ShortBoxSlice<PrivateSubtag>) : Comparable<Private> {
+data class Private(
+    val inner: ShortBoxSlice<PrivateSubtag>,
+) : Comparable<Private> {
     companion object {
         /** Returns a new empty list of private-use extensions. */
         fun empty(): Private = Private(ShortBoxSlice.empty())

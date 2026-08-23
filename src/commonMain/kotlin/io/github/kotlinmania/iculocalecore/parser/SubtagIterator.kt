@@ -11,7 +11,9 @@ package io.github.kotlinmania.iculocalecore.parser
  * The iterator is eager and fallible, allowing it to reject invalid slices
  * such as `"-"`, `"-en"`, `"en-"` etc.
  */
-class SubtagIterator(private var remaining: ByteArray) {
+class SubtagIterator(
+    private var remaining: ByteArray,
+) {
     private var current: ByteArray? = skipBeforeSeparator(remaining)
 
     companion object {
@@ -30,12 +32,13 @@ class SubtagIterator(private var remaining: ByteArray) {
     /** Returns the next subtag and advances the iterator. */
     fun next(): ByteArray? {
         val result = current ?: return null
-        current = if (result.size < remaining.size) {
-            remaining = remaining.copyOfRange(result.size + 1, remaining.size)
-            skipBeforeSeparator(remaining)
-        } else {
-            null
-        }
+        current =
+            if (result.size < remaining.size) {
+                remaining = remaining.copyOfRange(result.size + 1, remaining.size)
+                skipBeforeSeparator(remaining)
+            } else {
+                null
+            }
         return result
     }
 

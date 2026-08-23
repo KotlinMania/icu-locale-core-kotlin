@@ -17,8 +17,9 @@ package io.github.kotlinmania.iculocalecore.subtags
  * assertEquals(variants.toString(), "macos-posix")
  * ```
  */
-data class Variants(val inner: List<Variant>) : Iterable<Variant> {
-
+data class Variants(
+    val inner: List<Variant>,
+) : Iterable<Variant> {
     init {
         // Variants are expected to be sorted and deduplicated by the caller.
         // We enforce this invariant here for safety.

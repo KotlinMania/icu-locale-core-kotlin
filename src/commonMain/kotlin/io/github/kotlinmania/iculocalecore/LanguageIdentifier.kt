@@ -5,12 +5,10 @@ package io.github.kotlinmania.iculocalecore
 // called LICENSE at the top level of the ICU4X source tree
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
-import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.parseLanguageIdentifier
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
-import io.github.kotlinmania.iculocalecore.subtags.Variant
 import io.github.kotlinmania.iculocalecore.subtags.Variants
 
 /**
@@ -61,12 +59,13 @@ data class LanguageIdentifier(
 ) {
     /** The unknown language identifier "und". */
     companion object {
-        val UNKNOWN: LanguageIdentifier = LanguageIdentifier(
-            Language.UNKNOWN,
-            null,
-            null,
-            Variants.EMPTY,
-        )
+        val UNKNOWN: LanguageIdentifier =
+            LanguageIdentifier(
+                Language.UNKNOWN,
+                null,
+                null,
+                Variants.EMPTY,
+            )
 
         /**
          * A constructor which takes a utf8 slice, parses it and
@@ -144,14 +143,15 @@ data class LanguageIdentifier(
     fun normalize(input: String): Result<String> =
         LanguageIdentifier.tryFromStr(input).map { it.toString() }
 
-    override fun toString(): String = buildString {
-        append(language.asString())
-        script?.let { append("-").append(it.asString()) }
-        region?.let { append("-").append(it.asString()) }
-        for (variant in variants) {
-            append("-").append(variant.asString())
+    override fun toString(): String =
+        buildString {
+            append(language.asString())
+            script?.let { append("-").append(it.asString()) }
+            region?.let { append("-").append(it.asString()) }
+            for (variant in variants) {
+                append("-").append(variant.asString())
+            }
         }
-    }
 }
 
 /** Convert from a [Language] to a [LanguageIdentifier]. */
@@ -166,10 +166,15 @@ fun languageIdentifierOf(
 ): LanguageIdentifier = LanguageIdentifier(language, script, region, Variants.EMPTY)
 
 private fun <T : Comparable<T>> compareNullable(a: T?, b: T?): Int =
-    if (a == null && b == null) 0
-    else if (a == null) -1
-    else if (b == null) 1
-    else a.compareTo(b)
+    if (a == null && b == null) {
+        0
+    } else if (a == null) {
+        -1
+    } else if (b == null) {
+        1
+    } else {
+        a.compareTo(b)
+    }
 
 private fun <T : Comparable<T>> List<T>.compareTo(other: List<T>): Int {
     val sizeCmp = size.compareTo(other.size)

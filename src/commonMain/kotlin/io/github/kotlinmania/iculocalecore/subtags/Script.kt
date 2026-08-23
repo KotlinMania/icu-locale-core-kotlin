@@ -21,8 +21,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  *
  * [unicode_script_id]: https://unicode.org/reports/tr35/#unicode_script_id
  */
-data class Script(val value: String) : Comparable<Script> {
-
+data class Script(
+    val value: String,
+) : Comparable<Script> {
     init {
         require(value.length == 4 && value.all { it.isLetter() }) {
             "Invalid script: $value"

@@ -5,8 +5,6 @@ package io.github.kotlinmania.iculocalecore.extensions.unicode
 // called LICENSE at the top level of the ICU4X source tree
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
-import io.github.kotlinmania.iculocalecore.parser.ParseError
-import io.github.kotlinmania.iculocalecore.parser.ParseException
 import io.github.kotlinmania.iculocalecore.parser.SubtagIterator
 import io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice
 
@@ -23,7 +21,9 @@ import io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice
  * assertEquals(attributes.toString(), "foobar-testing")
  * ```
  */
-data class Attributes(val inner: ShortBoxSlice<Attribute>) : Comparable<Attributes> {
+data class Attributes(
+    val inner: ShortBoxSlice<Attribute>,
+) : Comparable<Attributes> {
     companion object {
         /** Returns a new empty set of attributes. */
         fun empty(): Attributes = Attributes(ShortBoxSlice.empty())

@@ -21,8 +21,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  *
  * [unicode_variant_id]: https://unicode.org/reports/tr35/#unicode_variant_id
  */
-data class Variant(val value: String) : Comparable<Variant> {
-
+data class Variant(
+    val value: String,
+) : Comparable<Variant> {
     init {
         require(value.length in 4..8 && value.all { it.isLetterOrDigit() && !it.isUpperCase() }) {
             "Invalid variant: $value"

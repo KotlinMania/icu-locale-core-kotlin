@@ -16,7 +16,6 @@ package io.github.kotlinmania.iculocalecore.shortvec
 class ShortBoxSlice<T> private constructor(
     private val items: List<T>,
 ) : Iterable<T> {
-
     companion object {
         /** Creates a new, empty [ShortBoxSlice]. */
         fun <T> empty(): ShortBoxSlice<T> = ShortBoxSlice(emptyList())

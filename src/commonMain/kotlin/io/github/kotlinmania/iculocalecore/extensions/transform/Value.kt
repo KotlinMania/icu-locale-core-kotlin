@@ -28,7 +28,9 @@ private val TRUE_TVALUE: Subtag = Subtag.parse("true").getOrThrow()
  * assertTrue(Value.parse("no").isFailure)
  * ```
  */
-data class Value(val inner: ShortBoxSlice<Subtag>) : Comparable<Value> {
+data class Value(
+    val inner: ShortBoxSlice<Subtag>,
+) : Comparable<Value> {
     companion object {
         /** Parses a string into a well-formed [Value]. */
         fun tryFromStr(s: String): Result<Value> = tryFromUtf8(s.encodeToByteArray())

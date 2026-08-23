@@ -5,8 +5,6 @@ package io.github.kotlinmania.iculocalecore.extensions.unicode
 // called LICENSE at the top level of the ICU4X source tree
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
-import io.github.kotlinmania.iculocalecore.parser.ParseError
-import io.github.kotlinmania.iculocalecore.parser.ParseException
 import io.github.kotlinmania.iculocalecore.parser.SubtagIterator
 import io.github.kotlinmania.iculocalecore.shortvec.LiteMap
 import io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice
@@ -27,7 +25,9 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * assertEquals(keywords.toString(), "hc-h23")
  * ```
  */
-data class Keywords(val inner: LiteMap<Key, Value>) : Comparable<Keywords> {
+data class Keywords(
+    val inner: LiteMap<Key, Value>,
+) : Comparable<Keywords> {
     companion object {
         /** Returns a new empty list of key-value pairs. */
         fun empty(): Keywords = Keywords(LiteMap.empty())
@@ -166,14 +166,15 @@ data class Keywords(val inner: LiteMap<Key, Value>) : Comparable<Keywords> {
         return 0
     }
 
-    override fun toString(): String = buildString {
-        for ((k, v) in inner.iter()) {
-            if (isNotEmpty()) append("-")
-            append(k.asString())
-            val vs = v.toString()
-            if (vs.isNotEmpty()) {
-                append("-").append(vs)
+    override fun toString(): String =
+        buildString {
+            for ((k, v) in inner.iter()) {
+                if (isNotEmpty()) append("-")
+                append(k.asString())
+                val vs = v.toString()
+                if (vs.isNotEmpty()) {
+                    append("-").append(vs)
+                }
             }
         }
-    }
 }

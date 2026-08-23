@@ -33,8 +33,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  *
  * [unicode_language_id]: https://unicode.org/reports/tr35/#unicode_language_id
  */
-data class Language(val value: String) : Comparable<Language> {
-
+data class Language(
+    val value: String,
+) : Comparable<Language> {
     init {
         require(value.length in 2..3 && value.all { it.isLowerCase() && it.isLetter() }) {
             "Invalid language: $value"

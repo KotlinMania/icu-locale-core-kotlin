@@ -20,7 +20,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * assertEquals(attr, Attribute.parse("buddhist").getOrThrow())
  * ```
  */
-data class Attribute(val value: String) : Comparable<Attribute> {
+data class Attribute(
+    val value: String,
+) : Comparable<Attribute> {
     init {
         require(value.length in 3..8) { "Attribute must be 3-8 characters" }
         require(value.all { it.isLetterOrDigit() }) { "Attribute must be alphanumeric" }

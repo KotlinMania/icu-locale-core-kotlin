@@ -27,7 +27,9 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * assertEquals(Value.parse("true").getOrThrow().toString(), "")
  * ```
  */
-data class Value(val inner: ShortBoxSlice<Subtag>) : Comparable<Value> {
+data class Value(
+    val inner: ShortBoxSlice<Subtag>,
+) : Comparable<Value> {
     companion object {
         private val TRUE_VALUE: Subtag = Subtag.parse("true").getOrThrow()
 

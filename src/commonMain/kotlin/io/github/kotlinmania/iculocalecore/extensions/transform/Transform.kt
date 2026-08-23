@@ -169,7 +169,12 @@ data class Transform(
 }
 
 private fun compareNullableLang(a: LanguageIdentifier?, b: LanguageIdentifier?): Int =
-    if (a == null && b == null) 0
-    else if (a == null) -1
-    else if (b == null) 1
-    else a.totalCmp(b)
+    if (a == null && b == null) {
+        0
+    } else if (a == null) {
+        -1
+    } else if (b == null) {
+        1
+    } else {
+        a.totalCmp(b)
+    }

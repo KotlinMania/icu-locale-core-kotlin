@@ -53,7 +53,13 @@ data class Other(
             val iter = SubtagIterator(codeUnits)
             val ext = iter.next() ?: return Result.failure(ParseException(ParseError.InvalidExtension))
             if (ext.size != 1) return Result.failure(ParseException(ParseError.InvalidExtension))
-            val extByte = ext[0].toInt().toChar().lowercaseChar().code.toByte()
+            val extByte =
+                ext[0]
+                    .toInt()
+                    .toChar()
+                    .lowercaseChar()
+                    .code
+                    .toByte()
             if (!extByte.toInt().toChar().isLetter()) return Result.failure(ParseException(ParseError.InvalidExtension))
             return tryFromIter(extByte, iter)
         }
