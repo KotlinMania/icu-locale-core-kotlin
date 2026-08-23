@@ -21,7 +21,9 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * val ss = SubdivisionSuffix.parse("sct").getOrThrow()
  * ```
  */
-data class SubdivisionSuffix(val value: String) : Comparable<SubdivisionSuffix> {
+data class SubdivisionSuffix(
+    val value: String,
+) : Comparable<SubdivisionSuffix> {
     init {
         require(value.length in 1..4) { "SubdivisionSuffix must be 1-4 characters" }
         require(value.all { it.isLetterOrDigit() }) { "SubdivisionSuffix must be alphanumeric" }

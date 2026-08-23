@@ -37,7 +37,14 @@ class TransformValueTest {
 
     @Test
     fun defaultValueIsTrue() {
-        assertEquals("true", Value.fromShortSliceUnchecked(io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice.empty()).toString())
+        assertEquals(
+            "true",
+            Value
+                .fromShortSliceUnchecked(
+                    io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice
+                        .empty(),
+                ).toString(),
+        )
     }
 }
 

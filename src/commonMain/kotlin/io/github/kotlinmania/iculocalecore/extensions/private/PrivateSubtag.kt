@@ -23,7 +23,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * assertEquals(subtag1.asString(), "foo")
  * ```
  */
-data class PrivateSubtag(val value: String) : Comparable<PrivateSubtag> {
+data class PrivateSubtag(
+    val value: String,
+) : Comparable<PrivateSubtag> {
     init {
         require(value.length in 1..8) { "PrivateSubtag must be 1-8 characters" }
         require(value.all { it.isLetterOrDigit() }) { "PrivateSubtag must be alphanumeric" }

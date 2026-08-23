@@ -36,13 +36,14 @@ data class DataLocale(
     val subdivision: Subtag?,
 ) {
     companion object {
-        val DEFAULT: DataLocale = DataLocale(
-            Language.UNKNOWN,
-            null,
-            null,
-            null,
-            null,
-        )
+        val DEFAULT: DataLocale =
+            DataLocale(
+                Language.UNKNOWN,
+                null,
+                null,
+                null,
+                null,
+            )
 
         /**
          * Parses a [DataLocale] from a string.
@@ -69,7 +70,7 @@ data class DataLocale(
                     region = langId.region,
                     variant = langId.variants.first(),
                     subdivision = null,
-                )
+                ),
             )
         }
     }
@@ -79,12 +80,13 @@ data class DataLocale(
         language.isUnknown() && script == null && region == null && variant == null && subdivision == null
 
     /** Converts this [DataLocale] into a [LanguageIdentifier]. */
-    fun toLanguageIdentifier(): LanguageIdentifier = LanguageIdentifier(
-        language = language,
-        script = script,
-        region = region,
-        variants = if (variant != null) Variants(listOf(variant)) else Variants.EMPTY,
-    )
+    fun toLanguageIdentifier(): LanguageIdentifier =
+        LanguageIdentifier(
+            language = language,
+            script = script,
+            region = region,
+            variants = if (variant != null) Variants(listOf(variant)) else Variants.EMPTY,
+        )
 
     /** Compare this [DataLocale] with BCP-47 bytes. */
     fun strictCmp(other: ByteArray): Int {
@@ -111,28 +113,35 @@ data class DataLocale(
         return compareNullable(subdivision, other.subdivision)
     }
 
-    override fun toString(): String = buildString {
-        append(language.asString())
-        script?.let { append("-").append(it.asString()) }
-        region?.let { append("-").append(it.asString()) }
-        variant?.let { append("-").append(it.asString()) }
-        subdivision?.let {
-            append("-u-sd-").append(it.asString())
+    override fun toString(): String =
+        buildString {
+            append(language.asString())
+            script?.let { append("-").append(it.asString()) }
+            region?.let { append("-").append(it.asString()) }
+            variant?.let { append("-").append(it.asString()) }
+            subdivision?.let {
+                append("-u-sd-").append(it.asString())
+            }
         }
-    }
 }
 
 /** Convert from a [LanguageIdentifier] to a [DataLocale]. */
-fun LanguageIdentifier.toDataLocale(): DataLocale = DataLocale(
-    language = language,
-    script = script,
-    region = region,
-    variant = variants.first(),
-    subdivision = null,
-)
+fun LanguageIdentifier.toDataLocale(): DataLocale =
+    DataLocale(
+        language = language,
+        script = script,
+        region = region,
+        variant = variants.first(),
+        subdivision = null,
+    )
 
 private fun <T : Comparable<T>> compareNullable(a: T?, b: T?): Int =
-    if (a == null && b == null) 0
-    else if (a == null) -1
-    else if (b == null) 1
-    else a.compareTo(b)
+    if (a == null && b == null) {
+        0
+    } else if (a == null) {
+        -1
+    } else if (b == null) {
+        1
+    } else {
+        a.compareTo(b)
+    }

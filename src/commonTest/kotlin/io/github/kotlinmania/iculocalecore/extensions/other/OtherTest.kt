@@ -4,7 +4,6 @@ package io.github.kotlinmania.iculocalecore.extensions.other
 import io.github.kotlinmania.iculocalecore.subtags.Subtag
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class OtherTest {

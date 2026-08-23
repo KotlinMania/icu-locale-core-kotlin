@@ -45,11 +45,14 @@ fun parseLanguageIdentifierFromIter(
     var region: Region? = null
     var variants = mutableListOf<Variant>()
 
-    val firstSubtag = iter.next()
-        ?: return Result.failure(ParseException(ParseError.InvalidLanguage))
-    val language = Language.tryFromUtf8(firstSubtag)
-        .onFailure { return Result.failure(it) }
-        .getOrThrow()
+    val firstSubtag =
+        iter.next()
+            ?: return Result.failure(ParseException(ParseError.InvalidLanguage))
+    val language =
+        Language
+            .tryFromUtf8(firstSubtag)
+            .onFailure { return Result.failure(it) }
+            .getOrThrow()
 
     var position = ParserPosition.Script
 
@@ -127,7 +130,7 @@ fun parseLanguageIdentifierFromIter(
             script = script,
             region = region,
             variants = Variants(variants),
-        )
+        ),
     )
 }
 

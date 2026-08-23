@@ -21,8 +21,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  *
  * [unicode_region_id]: https://unicode.org/reports/tr35/#unicode_region_id
  */
-data class Region(val value: String) : Comparable<Region> {
-
+data class Region(
+    val value: String,
+) : Comparable<Region> {
     init {
         require(value.length == 2 || value.length == 3) {
             "Invalid region length: $value"

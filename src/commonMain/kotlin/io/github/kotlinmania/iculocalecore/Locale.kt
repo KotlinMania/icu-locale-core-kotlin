@@ -6,13 +6,11 @@ package io.github.kotlinmania.iculocalecore
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 import io.github.kotlinmania.iculocalecore.extensions.Extensions
-import io.github.kotlinmania.iculocalecore.parser.ParseError
-import io.github.kotlinmania.iculocalecore.parser.parseLocale
 import io.github.kotlinmania.iculocalecore.parser.SubtagIterator
+import io.github.kotlinmania.iculocalecore.parser.parseLocale
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
-import io.github.kotlinmania.iculocalecore.subtags.Subtag
 
 /**
  * A core struct representing a Unicode Locale Identifier.
@@ -126,7 +124,9 @@ data class Locale(
 
         for (variant in id.variants) {
             val variantSubtag = iter.next() ?: return false
-            val variantResult = io.github.kotlinmania.iculocalecore.subtags.Variant.tryFromUtf8(variantSubtag)
+            val variantResult =
+                io.github.kotlinmania.iculocalecore.subtags.Variant
+                    .tryFromUtf8(variantSubtag)
             if (variantResult.isFailure || variantResult.getOrThrow() != variant) return false
         }
 
@@ -150,15 +150,16 @@ data class Locale(
         extensions.forEachSubtagStr(f)
     }
 
-    override fun toString(): String = buildString {
-        append(id.toString())
-        if (!extensions.isEmpty()) {
-            val extStr = extensions.toString()
-            if (extStr.isNotEmpty()) {
-                append("-").append(extStr)
+    override fun toString(): String =
+        buildString {
+            append(id.toString())
+            if (!extensions.isEmpty()) {
+                val extStr = extensions.toString()
+                if (extStr.isNotEmpty()) {
+                    append("-").append(extStr)
+                }
             }
         }
-    }
 }
 
 /** Convert from a [LanguageIdentifier] to a [Locale]. */
@@ -168,13 +169,15 @@ fun LanguageIdentifier.toLocale(): Locale = Locale(this, Extensions.empty())
 fun Language.toLocale(): Locale = Locale(toLanguageIdentifier(), Extensions.empty())
 
 /** Convert from a [Script] to a [Locale]. */
-fun Script.toLocale(): Locale = Locale(
-    LanguageIdentifier(Language.UNKNOWN, this, null, io.github.kotlinmania.iculocalecore.subtags.Variants.EMPTY),
-    Extensions.empty(),
-)
+fun Script.toLocale(): Locale =
+    Locale(
+        LanguageIdentifier(Language.UNKNOWN, this, null, io.github.kotlinmania.iculocalecore.subtags.Variants.EMPTY),
+        Extensions.empty(),
+    )
 
 /** Convert from a [Region] to a [Locale]. */
-fun Region.toLocale(): Locale = Locale(
-    LanguageIdentifier(Language.UNKNOWN, null, this, io.github.kotlinmania.iculocalecore.subtags.Variants.EMPTY),
-    Extensions.empty(),
-)
+fun Region.toLocale(): Locale =
+    Locale(
+        LanguageIdentifier(Language.UNKNOWN, null, this, io.github.kotlinmania.iculocalecore.subtags.Variants.EMPTY),
+        Extensions.empty(),
+    )

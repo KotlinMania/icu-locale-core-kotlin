@@ -20,7 +20,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * assertEquals(key1.asString(), "k0")
  * ```
  */
-data class Key(val value: String) : Comparable<Key> {
+data class Key(
+    val value: String,
+) : Comparable<Key> {
     init {
         require(value.length == 2) { "Key must be exactly 2 characters" }
         require(value[0].isLetter()) { "First character must be alphabetic" }

@@ -19,13 +19,17 @@ fun parseLocale(t: ByteArray): Result<io.github.kotlinmania.iculocalecore.Locale
     if (idResult.isFailure) return Result.failure(idResult.exceptionOrNull()!!)
     val id = idResult.getOrThrow()
 
-    val extensions = if (iter.peek() != null) {
-        val extResult = Extensions.tryFromIter(iter)
-        if (extResult.isFailure) return Result.failure(extResult.exceptionOrNull()!!)
-        extResult.getOrThrow()
-    } else {
-        Extensions.empty()
-    }
+    val extensions =
+        if (iter.peek() != null) {
+            val extResult = Extensions.tryFromIter(iter)
+            if (extResult.isFailure) return Result.failure(extResult.exceptionOrNull()!!)
+            extResult.getOrThrow()
+        } else {
+            Extensions.empty()
+        }
 
-    return Result.success(io.github.kotlinmania.iculocalecore.Locale(id, extensions))
+    return Result.success(
+        io.github.kotlinmania.iculocalecore
+            .Locale(id, extensions),
+    )
 }

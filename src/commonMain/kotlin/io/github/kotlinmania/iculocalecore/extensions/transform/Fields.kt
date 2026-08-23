@@ -18,7 +18,9 @@ import io.github.kotlinmania.iculocalecore.shortvec.LiteMap
  * assertEquals(fields.toString(), "h0-hybrid")
  * ```
  */
-data class Fields(val inner: LiteMap<Key, Value>) : Comparable<Fields> {
+data class Fields(
+    val inner: LiteMap<Key, Value>,
+) : Comparable<Fields> {
     companion object {
         /** Returns a new empty list of key-value pairs. */
         fun empty(): Fields = Fields(LiteMap.empty())
@@ -76,14 +78,15 @@ data class Fields(val inner: LiteMap<Key, Value>) : Comparable<Fields> {
         return 0
     }
 
-    override fun toString(): String = buildString {
-        for ((k, v) in inner.iter()) {
-            if (isNotEmpty()) append("-")
-            append(k.asString())
-            val vs = v.toString()
-            if (vs.isNotEmpty()) {
-                append("-").append(vs)
+    override fun toString(): String =
+        buildString {
+            for ((k, v) in inner.iter()) {
+                if (isNotEmpty()) append("-")
+                append(k.asString())
+                val vs = v.toString()
+                if (vs.isNotEmpty()) {
+                    append("-").append(vs)
+                }
             }
         }
-    }
 }

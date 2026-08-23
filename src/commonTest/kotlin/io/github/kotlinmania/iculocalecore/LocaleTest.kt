@@ -26,7 +26,11 @@ class LocaleTest {
         val loc = Locale.parse("en-US-u-ca-buddhist").getOrThrow()
         assertEquals("en-US-u-ca-buddhist", loc.toString())
         val key = Key.parse("ca").getOrThrow()
-        assertEquals(Value.parse("buddhist").getOrThrow(), loc.extensions.unicode.keywords.get(key))
+        assertEquals(
+            Value.parse("buddhist").getOrThrow(),
+            loc.extensions.unicode.keywords
+                .get(key),
+        )
     }
 
     @Test

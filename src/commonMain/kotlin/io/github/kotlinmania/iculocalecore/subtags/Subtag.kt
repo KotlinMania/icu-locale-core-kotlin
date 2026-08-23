@@ -20,8 +20,9 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * assertEquals(subtag1.asString(), "foo")
  * ```
  */
-data class Subtag(val value: String) : Comparable<Subtag> {
-
+data class Subtag(
+    val value: String,
+) : Comparable<Subtag> {
     init {
         require(value.length in 2..8 && value.all { it.isLetterOrDigit() && !it.isUpperCase() }) {
             "Invalid subtag: $value"

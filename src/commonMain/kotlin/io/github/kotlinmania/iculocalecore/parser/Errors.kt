@@ -79,4 +79,6 @@ enum class ParseError(
 }
 
 /** Wraps a [ParseError] so it can be used with Kotlin's [Result] type. */
-class ParseException(val error: ParseError) : Exception(error.message)
+class ParseException(
+    val error: ParseError,
+) : Exception(error.message)

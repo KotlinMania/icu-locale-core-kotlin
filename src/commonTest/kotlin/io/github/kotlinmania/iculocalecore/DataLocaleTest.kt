@@ -1,12 +1,9 @@
 package io.github.kotlinmania.iculocalecore
 
-import io.github.kotlinmania.iculocalecore.subtags.Language
-import io.github.kotlinmania.iculocalecore.subtags.Region
-import io.github.kotlinmania.iculocalecore.subtags.Script
 import kotlin.test.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 import kotlin.test.assertFalse
+import kotlin.test.assertTrue
 
 class DataLocaleTest {
     @Test

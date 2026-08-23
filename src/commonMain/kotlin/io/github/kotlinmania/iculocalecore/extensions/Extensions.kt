@@ -6,12 +6,12 @@ package io.github.kotlinmania.iculocalecore.extensions
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 import io.github.kotlinmania.iculocalecore.extensions.other.Other
-import io.github.kotlinmania.iculocalecore.extensions.private.Private
 import io.github.kotlinmania.iculocalecore.extensions.private.PRIVATE_EXT_CHAR
-import io.github.kotlinmania.iculocalecore.extensions.transform.Transform
+import io.github.kotlinmania.iculocalecore.extensions.private.Private
 import io.github.kotlinmania.iculocalecore.extensions.transform.TRANSFORM_EXT_CHAR
-import io.github.kotlinmania.iculocalecore.extensions.unicode.Unicode
+import io.github.kotlinmania.iculocalecore.extensions.transform.Transform
 import io.github.kotlinmania.iculocalecore.extensions.unicode.UNICODE_EXT_CHAR
+import io.github.kotlinmania.iculocalecore.extensions.unicode.Unicode
 import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.ParseException
 import io.github.kotlinmania.iculocalecore.parser.SubtagIterator
@@ -30,7 +30,9 @@ sealed class ExtensionType {
     object Private : ExtensionType()
 
     /** All other extension types. */
-    data class Other(val byte: Byte) : ExtensionType()
+    data class Other(
+        val byte: Byte,
+    ) : ExtensionType()
 
     companion object {
         /** Tries to create an [ExtensionType] from a byte slice. */
@@ -41,7 +43,13 @@ sealed class ExtensionType {
 
         /** Tries to create an [ExtensionType] from a single byte. */
         fun tryFromByte(key: Byte): Result<ExtensionType> {
-            val lower = key.toInt().toChar().lowercaseChar().code.toByte()
+            val lower =
+                key
+                    .toInt()
+                    .toChar()
+                    .lowercaseChar()
+                    .code
+                    .toByte()
             return when (lower.toInt().toChar()) {
                 UNICODE_EXT_CHAR -> Result.success(ExtensionType.Unicode)
                 TRANSFORM_EXT_CHAR -> Result.success(ExtensionType.Transform)
@@ -80,20 +88,22 @@ data class Extensions(
 ) {
     companion object {
         /** Returns a new empty map of extensions. */
-        fun empty(): Extensions = Extensions(
-            Unicode.empty(),
-            Transform.empty(),
-            Private.empty(),
-            emptyList(),
-        )
+        fun empty(): Extensions =
+            Extensions(
+                Unicode.empty(),
+                Transform.empty(),
+                Private.empty(),
+                emptyList(),
+            )
 
         /** Creates an [Extensions] containing exactly one unicode extension. */
-        fun fromUnicode(unicode: Unicode): Extensions = Extensions(
-            unicode,
-            Transform.empty(),
-            Private.empty(),
-            emptyList(),
-        )
+        fun fromUnicode(unicode: Unicode): Extensions =
+            Extensions(
+                unicode,
+                Transform.empty(),
+                Private.empty(),
+                emptyList(),
+            )
 
         /** Parses an [Extensions] from a [SubtagIterator]. */
         fun tryFromIter(iter: SubtagIterator): Result<Extensions> {
@@ -147,12 +157,14 @@ data class Extensions(
                 }
             }
 
-            return Result.success(Extensions(
-                unicode ?: Unicode.empty(),
-                transform ?: Transform.empty(),
-                private ?: Private.empty(),
-                other,
-            ))
+            return Result.success(
+                Extensions(
+                    unicode ?: Unicode.empty(),
+                    transform ?: Transform.empty(),
+                    private ?: Private.empty(),
+                    other,
+                ),
+            )
         }
     }
 
@@ -193,10 +205,11 @@ data class Extensions(
         private.forEachSubtagStr(f, true)
     }
 
-    override fun toString(): String = buildString {
-        forEachSubtagStr { s ->
-            if (isNotEmpty()) append("-")
-            append(s)
+    override fun toString(): String =
+        buildString {
+            forEachSubtagStr { s ->
+                if (isNotEmpty()) append("-")
+                append(s)
+            }
         }
-    }
 }
