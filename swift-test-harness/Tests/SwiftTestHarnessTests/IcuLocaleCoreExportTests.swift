@@ -5,6 +5,6 @@ import IcuLocaleCore
 struct IcuLocaleCoreExportTests {
     @Test("Swift module loads and is callable")
     func swiftModuleLoads() throws {
-        #expect(true, "IcuLocaleCore swift module imported cleanly")
+        #expect(Bool(true), "IcuLocaleCore swift module imported cleanly")
     }
 }
