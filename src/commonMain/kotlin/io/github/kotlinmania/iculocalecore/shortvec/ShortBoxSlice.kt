@@ -13,7 +13,7 @@ package io.github.kotlinmania.iculocalecore.shortvec
  * a simple list-backed approach since Kotlin does not have the same
  * stack-vs-heap constraints.
  */
-class ShortBoxSlice<T> private constructor(
+internal class ShortBoxSlice<T> private constructor(
     private val items: List<T>,
 ) : Iterable<T> {
     companion object {

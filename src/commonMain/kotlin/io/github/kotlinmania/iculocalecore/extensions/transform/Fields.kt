@@ -18,15 +18,15 @@ import io.github.kotlinmania.iculocalecore.shortvec.LiteMap
  * assertEquals(fields.toString(), "h0-hybrid")
  * ```
  */
-data class Fields(
-    val inner: LiteMap<Key, Value>,
+class Fields internal constructor(
+    internal val inner: LiteMap<Key, Value>,
 ) : Comparable<Fields> {
     companion object {
         /** Returns a new empty list of key-value pairs. */
         fun empty(): Fields = Fields(LiteMap.empty())
 
         /** Creates a [Fields] from a list of pairs, sorting and deduplicating. */
-        fun fromPairs(pairs: List<Pair<Key, Value>>): Fields {
+        internal fun fromPairs(pairs: List<Pair<Key, Value>>): Fields {
             val map = LiteMap.fromIterable(pairs)
             return Fields(map)
         }
@@ -77,6 +77,11 @@ data class Fields(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Fields && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String =
         buildString {

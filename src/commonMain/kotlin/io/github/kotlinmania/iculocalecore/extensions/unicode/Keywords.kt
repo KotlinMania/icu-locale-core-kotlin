@@ -25,8 +25,8 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * assertEquals(keywords.toString(), "hc-h23")
  * ```
  */
-data class Keywords(
-    val inner: LiteMap<Key, Value>,
+class Keywords internal constructor(
+    internal val inner: LiteMap<Key, Value>,
 ) : Comparable<Keywords> {
     companion object {
         /** Returns a new empty list of key-value pairs. */
@@ -40,7 +40,7 @@ data class Keywords(
         }
 
         /** Creates a [Keywords] from a list of pairs, sorting and deduplicating. */
-        fun fromPairs(pairs: List<Pair<Key, Value>>): Keywords {
+        internal fun fromPairs(pairs: List<Pair<Key, Value>>): Keywords {
             val map = LiteMap.fromIterable(pairs)
             return Keywords(map)
         }
@@ -123,7 +123,7 @@ data class Keywords(
     }
 
     /** Returns an ordered iterator over key-value pairs. */
-    fun iter(): List<Pair<Key, Value>> = inner.iter()
+    internal fun iter(): List<Pair<Key, Value>> = inner.iter()
 
     /** Extends the [Keywords] with values from another [Keywords]. */
     fun extendFromKeywords(other: Keywords) {
@@ -165,6 +165,11 @@ data class Keywords(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Keywords && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String =
         buildString {

@@ -15,7 +15,7 @@ package io.github.kotlinmania.iculocalecore.shortvec
  * Keys are maintained in sorted order. Insertion uses binary search to
  * find the correct position, ensuring the map is always sorted.
  */
-class LiteMap<K : Comparable<K>, V> private constructor(
+internal class LiteMap<K : Comparable<K>, V> private constructor(
     private val entries: MutableList<Pair<K, V>>,
 ) {
     companion object {

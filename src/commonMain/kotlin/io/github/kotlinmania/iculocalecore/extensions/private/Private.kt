@@ -28,15 +28,15 @@ const val PRIVATE_EXT_STR: String = "x"
  * assertEquals(private_.toString(), "x-foo-bar")
  * ```
  */
-data class Private(
-    val inner: ShortBoxSlice<PrivateSubtag>,
+class Private internal constructor(
+    internal val inner: ShortBoxSlice<PrivateSubtag>,
 ) : Comparable<Private> {
     companion object {
         /** Returns a new empty list of private-use extensions. */
         fun empty(): Private = Private(ShortBoxSlice.empty())
 
         /** Creates a [Private] from a pre-sorted list. */
-        fun fromVecUnchecked(input: List<PrivateSubtag>): Private =
+        internal fun fromVecUnchecked(input: List<PrivateSubtag>): Private =
             Private(ShortBoxSlice.fromList(input))
 
         /** Creates a [Private] containing a single subtag. */
@@ -112,6 +112,11 @@ data class Private(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Private && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String {
         if (isEmpty()) return ""
