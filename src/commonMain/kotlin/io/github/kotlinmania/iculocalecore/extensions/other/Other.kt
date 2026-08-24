@@ -26,9 +26,9 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * assertEquals(other.toString(), "a-foo-bar")
  * ```
  */
-data class Other(
+class Other internal constructor(
     val ext: Byte,
-    val keys: ShortBoxSlice<Subtag>,
+    internal val keys: ShortBoxSlice<Subtag>,
 ) : Comparable<Other> {
     init {
         require(ext.toInt().toChar().isLetter()) { "Extension byte must be ASCII alphabetic" }
@@ -36,11 +36,11 @@ data class Other(
 
     companion object {
         /** Creates an [Other] from a pre-sorted list of subtags. */
-        fun fromVecUnchecked(ext: Byte, keys: List<Subtag>): Other =
+        internal fun fromVecUnchecked(ext: Byte, keys: List<Subtag>): Other =
             Other(ext, ShortBoxSlice.fromList(keys))
 
         /** Creates an [Other] from a [ShortBoxSlice] of subtags. */
-        fun fromShortSliceUnchecked(ext: Byte, keys: ShortBoxSlice<Subtag>): Other {
+        internal fun fromShortSliceUnchecked(ext: Byte, keys: ShortBoxSlice<Subtag>): Other {
             require(ext.toInt().toChar().isLetter()) { "Extension byte must be ASCII alphabetic" }
             return Other(ext, keys)
         }
@@ -118,6 +118,11 @@ data class Other(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Other && ext == other.ext && keys == other.keys
+
+    override fun hashCode(): Int = 31 * ext.hashCode() + keys.hashCode()
 
     override fun toString(): String {
         if (keys.isEmpty()) return ""

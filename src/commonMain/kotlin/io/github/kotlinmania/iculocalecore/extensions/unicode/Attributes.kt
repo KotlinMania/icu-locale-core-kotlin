@@ -21,15 +21,15 @@ import io.github.kotlinmania.iculocalecore.shortvec.ShortBoxSlice
  * assertEquals(attributes.toString(), "foobar-testing")
  * ```
  */
-data class Attributes(
-    val inner: ShortBoxSlice<Attribute>,
+class Attributes internal constructor(
+    internal val inner: ShortBoxSlice<Attribute>,
 ) : Comparable<Attributes> {
     companion object {
         /** Returns a new empty set of attributes. */
         fun empty(): Attributes = Attributes(ShortBoxSlice.empty())
 
         /** Creates an [Attributes] from a pre-sorted list. */
-        fun fromVecUnchecked(input: List<Attribute>): Attributes =
+        internal fun fromVecUnchecked(input: List<Attribute>): Attributes =
             Attributes(ShortBoxSlice.fromList(input))
 
         /** Parses a string into a well-formed [Attributes]. */
@@ -127,6 +127,11 @@ data class Attributes(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Attributes && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String = inner.toList().joinToString("-") { it.asString() }
 }

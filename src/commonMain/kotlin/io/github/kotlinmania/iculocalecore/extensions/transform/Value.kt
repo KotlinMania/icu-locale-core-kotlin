@@ -28,8 +28,8 @@ private val TRUE_TVALUE: Subtag = Subtag.parse("true").getOrThrow()
  * assertTrue(Value.parse("no").isFailure)
  * ```
  */
-data class Value(
-    val inner: ShortBoxSlice<Subtag>,
+class Value internal constructor(
+    internal val inner: ShortBoxSlice<Subtag>,
 ) : Comparable<Value> {
     companion object {
         /** Parses a string into a well-formed [Value]. */
@@ -63,7 +63,7 @@ data class Value(
         fun parse(s: String): Result<Value> = tryFromStr(s)
 
         /** Creates a [Value] from a [ShortBoxSlice] of subtags. */
-        fun fromShortSliceUnchecked(input: ShortBoxSlice<Subtag>): Value = Value(input)
+        internal fun fromShortSliceUnchecked(input: ShortBoxSlice<Subtag>): Value = Value(input)
 
         /** Returns whether the byte array is a valid type subtag (3-8 alphanumeric chars). */
         fun isTypeSubtag(t: ByteArray): Boolean =
@@ -101,6 +101,11 @@ data class Value(
         }
         return 0
     }
+
+    override fun equals(other: Any?): Boolean =
+        other is Value && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String {
         if (inner.isEmpty()) return "true"

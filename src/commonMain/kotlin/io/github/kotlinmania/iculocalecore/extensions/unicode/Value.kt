@@ -27,8 +27,8 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * assertEquals(Value.parse("true").getOrThrow().toString(), "")
  * ```
  */
-data class Value(
-    val inner: ShortBoxSlice<Subtag>,
+class Value internal constructor(
+    internal val inner: ShortBoxSlice<Subtag>,
 ) : Comparable<Value> {
     companion object {
         private val TRUE_VALUE: Subtag = Subtag.parse("true").getOrThrow()
@@ -75,7 +75,7 @@ data class Value(
         fun parse(s: String): Result<Value> = tryFromStr(s)
 
         /** Creates a [Value] from a [ShortBoxSlice] of subtags. */
-        fun fromShortSliceUnchecked(input: ShortBoxSlice<Subtag>): Value = Value(input)
+        internal fun fromShortSliceUnchecked(input: ShortBoxSlice<Subtag>): Value = Value(input)
 
         /** Parses a single subtag from UTF-8 bytes, returning None for "true". */
         fun parseSubtagFromUtf8(t: ByteArray): Result<Subtag?> {
@@ -138,6 +138,11 @@ data class Value(
 
     /** Compares this [Value] with a string. */
     fun eq(other: String): Boolean = toString() == other
+
+    override fun equals(other: Any?): Boolean =
+        other is Value && inner == other.inner
+
+    override fun hashCode(): Int = inner.hashCode()
 
     override fun toString(): String {
         if (inner.isEmpty()) return ""
