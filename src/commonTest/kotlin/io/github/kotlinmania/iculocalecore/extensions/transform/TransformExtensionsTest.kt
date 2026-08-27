@@ -1,4 +1,4 @@
-// port-lint: tests extensions/transform/mod.rs, extensions/transform/key.rs, extensions/transform/value.rs, extensions/transform/fields.rs
+// port-lint: tests icu_locale_core/src/icu_locale_core/src/extensions/transform/mod.rs, icu_locale_core/src/extensions/transform/key.rs, icu_locale_core/src/extensions/transform/value.rs, icu_locale_core/src/extensions/transform/fields.rs
 package io.github.kotlinmania.iculocalecore.extensions.transform
 
 import kotlin.test.Test

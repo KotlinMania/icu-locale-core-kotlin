@@ -1,4 +1,4 @@
-// port-lint: tests data.rs
+// port-lint: tests icu_locale_core/src/data.rs
 package io.github.kotlinmania.iculocalecore
 
 import kotlin.test.Test

@@ -1,4 +1,4 @@
-// port-lint: tests extensions/other/mod.rs
+// port-lint: tests icu_locale_core/src/extensions/other/mod.rs
 package io.github.kotlinmania.iculocalecore.extensions.other
 
 import io.github.kotlinmania.iculocalecore.subtags.Subtag
