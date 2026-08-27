@@ -1,4 +1,4 @@
-// port-lint: tests shortvec/mod.rs
+// port-lint: tests icu_locale_core/src/shortvec/mod.rs
 package io.github.kotlinmania.iculocalecore.shortvec
 
 import kotlin.test.Test

@@ -1,4 +1,4 @@
-// port-lint: tests preferences/extensions/unicode/errors.rs
+// port-lint: tests icu_locale_core/src/preferences/extensions/unicode/errors.rs
 package io.github.kotlinmania.iculocalecore.preferences.extensions.unicode
 
 import kotlin.test.Test
