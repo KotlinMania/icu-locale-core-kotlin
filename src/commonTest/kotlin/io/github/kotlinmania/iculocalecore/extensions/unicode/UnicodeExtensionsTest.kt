@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/icu_locale_core/src/extensions/unicode/mod.rs, icu_locale_core/src/extensions/unicode/key.rs, icu_locale_core/src/extensions/unicode/attribute.rs, icu_locale_core/src/extensions/unicode/keywords.rs, icu_locale_core/src/extensions/unicode/value.rs
+// port-lint: tests icu_locale_core/src/extensions/unicode/mod.rs, icu_locale_core/src/extensions/unicode/key.rs, icu_locale_core/src/extensions/unicode/attribute.rs, icu_locale_core/src/extensions/unicode/keywords.rs, icu_locale_core/src/extensions/unicode/value.rs
 package io.github.kotlinmania.iculocalecore.extensions.unicode
 
 import kotlin.test.Test
