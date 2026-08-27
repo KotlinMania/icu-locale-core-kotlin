@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 51/63 (81.0%)
+- **Files Present:** 52/63 (82.5%)
 - **Function parity:** 145/301 matched (target 585) — 48.2%
-- **Class/type parity:** 24/57 matched (target 91) — 42.1%
-- **Combined symbol parity:** 169/358 matched (target 676) — 47.2%
+- **Class/type parity:** 24/57 matched (target 92) — 42.1%
+- **Combined symbol parity:** 169/358 matched (target 677) — 47.2%
 - **Average inline-code cosine:** 0.10 (function body across 42 matched files)
 - **Average documentation cosine:** 0.72 (doc text across 42 matched files)
-- **Cheat-zeroed Files:** 37
-- **Critical Issues:** 51 files with <0.60 function similarity
+- **Cheat-zeroed Files:** 38
+- **Critical Issues:** 52 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -379,19 +379,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 31. keywords.regional_subdivision
-
-- **Target:** `keywords.RegionalSubdivision`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10110.0
-- **Functions:** 0/1 matched (target 6)
-- **Missing functions:** `region_subdivision_test`
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Tests:** 0/1 matched
-
-### 32. keywords.region_override
+### 31. keywords.region_override
 
 - **Target:** `keywords.RegionOverride`
 - **Similarity:** 0.00
@@ -399,6 +387,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Priority Score:** 10110.0
 - **Functions:** 0/1 matched (target 6)
 - **Missing functions:** `region_override_test`
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+- **Tests:** 0/1 matched
+
+### 32. keywords.regional_subdivision
+
+- **Target:** `keywords.RegionalSubdivision`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10110.0
+- **Functions:** 0/1 matched (target 6)
+- **Missing functions:** `region_subdivision_test`
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
@@ -425,40 +425,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 35. keywords.currency
+### 35. lib
 
-- **Target:** `keywords.Currency [ZERO]`
+- **Target:** `iculocalecore.Lib [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
+- **Functions:** 0/0 matched
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 36. keywords.timezone
-
-- **Target:** `keywords.Timezone [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 37. keywords.calendar
-
-- **Target:** `keywords.Calendar [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 8)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 16)
-- **Missing types:** _none_
-
-### 38. keywords.variant
+### 36. keywords.variant
 
 - **Target:** `keywords.Variant [ZERO]`
 - **Similarity:** 0.00
@@ -469,7 +447,40 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 39. keywords.first_day
+### 37. keywords.timezone
+
+- **Target:** `keywords.Timezone [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 38. keywords.calendar
+
+- **Target:** `keywords.Calendar [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 8)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 16)
+- **Missing types:** _none_
+
+### 39. keywords.currency
+
+- **Target:** `keywords.Currency [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 40. keywords.first_day
 
 - **Target:** `keywords.FirstDay [ZERO]`
 - **Similarity:** 0.00
@@ -480,7 +491,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 40. keywords.collation
+### 41. keywords.collation
 
 - **Target:** `keywords.Collation [ZERO]`
 - **Similarity:** 0.00
@@ -491,7 +502,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
 
-### 41. keywords.line_break
+### 42. keywords.line_break
 
 - **Target:** `keywords.LineBreak [ZERO]`
 - **Similarity:** 0.00
@@ -502,7 +513,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 42. keywords.hour_cycle
+### 43. keywords.hour_cycle
 
 - **Target:** `keywords.HourCycle [ZERO]`
 - **Similarity:** 0.00
@@ -513,7 +524,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 43. keywords.line_break_word
+### 44. keywords.line_break_word
 
 - **Target:** `keywords.LineBreakWord [ZERO]`
 - **Similarity:** 0.00
@@ -524,7 +535,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 44. keywords.emoji
+### 45. keywords.emoji
 
 - **Target:** `keywords.Emoji [ZERO]`
 - **Similarity:** 0.00
@@ -535,7 +546,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 45. keywords.currency_format
+### 46. keywords.currency_format
 
 - **Target:** `keywords.CurrencyFormat [ZERO]`
 - **Similarity:** 0.00
@@ -546,7 +557,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 46. keywords.numbering_system
+### 47. keywords.numbering_system
 
 - **Target:** `keywords.NumberingSystem [ZERO]`
 - **Similarity:** 0.00
@@ -557,7 +568,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 47. keywords.dictionary_break
+### 48. keywords.dictionary_break
 
 - **Target:** `keywords.DictionaryBreak [ZERO]`
 - **Similarity:** 0.00
@@ -568,7 +579,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 48. keywords.measurement_system
+### 49. keywords.measurement_system
 
 - **Target:** `keywords.MeasurementSystem [ZERO]`
 - **Similarity:** 0.00
@@ -579,7 +590,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 49. keywords.sentence_supression
+### 50. keywords.sentence_supression
 
 - **Target:** `keywords.SentenceSupression [ZERO]`
 - **Similarity:** 0.00
@@ -590,7 +601,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 50. transform.key
+### 51. transform.key
 
 - **Target:** `transform.Key [ZERO]`
 - **Similarity:** 0.00
@@ -601,7 +612,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 51. keywords.measurement_unit_override
+### 52. keywords.measurement_unit_override
 
 - **Target:** `keywords.MeasurementUnitOverride [ZERO]`
 - **Similarity:** 0.00
