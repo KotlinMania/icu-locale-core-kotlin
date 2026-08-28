@@ -15,5 +15,23 @@
     "todos": true,
     "lint": true
   },
-  "reexport_modules": []
+  "reexport_modules": [
+    "databake",
+    "helpers",
+    "macros",
+    "serde",
+    "zerovec",
+    "preferences/extensions/mod",
+    "preferences/extensions/unicode/keywords/mod",
+    "preferences/extensions/unicode/macros/mod",
+    "preferences/extensions/unicode/mod",
+    "preferences/extensions/unicode/macros/enum_keyword",
+    "preferences/extensions/unicode/macros/struct_keyword",
+    "preferences.extensions.mod",
+    "preferences.extensions.unicode.keywords.mod",
+    "preferences.extensions.unicode.macros.mod",
+    "preferences.extensions.unicode.mod",
+    "preferences.extensions.unicode.macros.enum_keyword",
+    "preferences.extensions.unicode.macros.struct_keyword"
+  ]
 }
