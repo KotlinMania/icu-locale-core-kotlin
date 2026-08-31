@@ -2,7 +2,7 @@
   "type": "port",
   "name": "icu-locale-core-kotlin",
   "source": {
-    "path": "tmp/icu_locale_core/src",
+    "path": "tmp",
     "lang": "rust"
   },
   "target": {
