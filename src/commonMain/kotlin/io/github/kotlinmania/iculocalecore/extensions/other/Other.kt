@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/extensions/other/mod.rs
+// port-lint: source extensions/other/mod.rs
 package io.github.kotlinmania.iculocalecore.extensions.other
 
 // This file is part of ICU4X. For terms of use, please see the file
@@ -22,7 +22,7 @@ import io.github.kotlinmania.iculocalecore.subtags.Subtag
  * ```
  * val subtag1 = Subtag.parse("foo").getOrThrow()
  * val subtag2 = Subtag.parse("bar").getOrThrow()
- * val other = Other.fromVecUnchecked('a'.code.toByte(), listOf(subtag1, subtag2))
+ * val other = Other.fromVecUnchecked("a"[0].code.toByte(), listOf(subtag1, subtag2))
  * assertEquals(other.toString(), "a-foo-bar")
  * ```
  */

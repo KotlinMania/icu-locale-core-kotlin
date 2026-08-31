@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/parser/mod.rs
+// port-lint: tests parser/mod.rs
 package io.github.kotlinmania.iculocalecore.parser
 
 import kotlin.test.Test

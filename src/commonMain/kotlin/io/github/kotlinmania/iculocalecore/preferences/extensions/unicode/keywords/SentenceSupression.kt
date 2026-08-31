@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/sentence_supression.rs
+// port-lint: source preferences/extensions/unicode/keywords/sentence_supression.rs
 package io.github.kotlinmania.iculocalecore.preferences.extensions.unicode.keywords
 
 // This file is part of ICU4X. For terms of use, please see the file

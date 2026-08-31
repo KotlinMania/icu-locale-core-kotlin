@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/extensions/private/other.rs
+// port-lint: source extensions/private/other.rs
 package io.github.kotlinmania.iculocalecore.extensions.private
 
 // This file is part of ICU4X. For terms of use, please see the file

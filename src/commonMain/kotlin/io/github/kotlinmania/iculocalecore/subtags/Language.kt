@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/subtags/language.rs
+// port-lint: source subtags/language.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 import io.github.kotlinmania.iculocalecore.parser.ParseError
@@ -12,7 +12,7 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * A language subtag (examples: `"en"`, `"csb"`, `"zh"`, `"und"`, etc.)
  *
  * [Language] represents a Unicode base language code conformant to the
- * `unicode_language_id` field of the Language and Locale Identifier.
+ * Unicode language ID field of the Language and Locale Identifier.
  *
  * Examples
  * ```
@@ -30,8 +30,6 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * Notice: ICU4X uses a narrow form of language subtag of 2-3 characters.
  * The specification allows language subtag to optionally also be 5-8 characters
  * but that form has not been used and ICU4X does not support it right now.
- *
- * [unicode_language_id]: https://unicode.org/reports/tr35/#unicode_language_id
  */
 data class Language(
     val value: String,

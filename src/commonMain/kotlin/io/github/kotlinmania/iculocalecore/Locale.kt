@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/locale.rs
+// port-lint: source locale.rs
 package io.github.kotlinmania.iculocalecore
 
 // This file is part of ICU4X. For terms of use, please see the file
@@ -53,7 +53,7 @@ import io.github.kotlinmania.iculocalecore.subtags.Script
  * assertEquals(loc.id.variants.first(), io.github.kotlinmania.iculocalecore.subtags.Variant.parse("valencia").getOrThrow())
  * ```
  *
- * [Unicode Locale Identifier]: https://unicode.org/reports/tr35/tr35.html#Unicode_locale_identifier
+ * [Unicode Locale Identifier]: https://unicode.org/reports/tr35/tr35.html
  */
 data class Locale(
     /** The basic language/script/region components along with any variants. */
