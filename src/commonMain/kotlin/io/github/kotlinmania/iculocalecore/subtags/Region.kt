@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/subtags/region.rs
+// port-lint: source subtags/region.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 import io.github.kotlinmania.iculocalecore.parser.ParseError
@@ -12,14 +12,12 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * A region subtag (examples: `"US"`, `"CN"`, `"AR"` etc.)
  *
  * [Region] represents a Unicode base language code conformant to the
- * `unicode_region_id` field of the Language and Locale Identifier.
+ * Unicode region ID field of the Language and Locale Identifier.
  *
  * Examples
  * ```
  * val region: Region = Region.parse("DE").getOrThrow()
  * ```
- *
- * [unicode_region_id]: https://unicode.org/reports/tr35/#unicode_region_id
  */
 data class Region(
     val value: String,

@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/preferences/extensions/unicode/keywords/mod.rs
+// port-lint: tests preferences/extensions/unicode/keywords/mod.rs
 package io.github.kotlinmania.iculocalecore.preferences.extensions.unicode.keywords
 
 // This file is part of ICU4X. For terms of use, please see the file

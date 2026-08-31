@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/langid.rs
+// port-lint: source langid.rs
 package io.github.kotlinmania.iculocalecore
 
 // This file is part of ICU4X. For terms of use, please see the file
@@ -45,7 +45,7 @@ import io.github.kotlinmania.iculocalecore.subtags.Variants
  * assertEquals(li.variants.first(), Variant.parse("valencia").getOrThrow())
  * ```
  *
- * [Unicode BCP47 Language Identifier]: https://unicode.org/reports/tr35/tr35.html#Unicode_language_identifier
+ * [Unicode BCP47 Language Identifier]: https://unicode.org/reports/tr35/tr35.html
  */
 data class LanguageIdentifier(
     /** Language subtag of the language identifier. */

@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/subtags/variant.rs
+// port-lint: source subtags/variant.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 import io.github.kotlinmania.iculocalecore.parser.ParseError
@@ -12,14 +12,12 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  * A variant subtag (examples: `"macos"`, `"posix"`, `"1996"` etc.)
  *
  * [Variant] represents a Unicode base language code conformant to the
- * `unicode_variant_id` field of the Language and Locale Identifier.
+ * Unicode variant ID field of the Language and Locale Identifier.
  *
  * Examples
  * ```
  * val variant: Variant = Variant.parse("macos").getOrThrow()
  * ```
- *
- * [unicode_variant_id]: https://unicode.org/reports/tr35/#unicode_variant_id
  */
 data class Variant(
     val value: String,

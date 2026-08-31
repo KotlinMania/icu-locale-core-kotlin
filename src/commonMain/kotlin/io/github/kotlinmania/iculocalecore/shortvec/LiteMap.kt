@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/shortvec/litemap.rs
+// port-lint: source shortvec/litemap.rs
 package io.github.kotlinmania.iculocalecore.shortvec
 
 // This file is part of ICU4X. For terms of use, please see the file

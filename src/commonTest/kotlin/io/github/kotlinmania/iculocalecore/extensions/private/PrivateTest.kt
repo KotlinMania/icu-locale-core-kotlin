@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/extensions/private/mod.rs, icu_locale_core/src/extensions/other/mod.rs
+// port-lint: tests extensions/private/mod.rs, extensions/other/mod.rs
 package io.github.kotlinmania.iculocalecore.extensions.private
 
 import kotlin.test.Test

@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/hour_cycle.rs
+// port-lint: source preferences/extensions/unicode/keywords/hour_cycle.rs
 package io.github.kotlinmania.iculocalecore.preferences.extensions.unicode.keywords
 
 // This file is part of ICU4X. For terms of use, please see the file
@@ -18,13 +18,13 @@ import io.github.kotlinmania.iculocalecore.preferences.extensions.unicode.Prefer
 enum class HourCycle(
     val subtag: String,
 ) : PreferenceKey {
-    /** The typical 12-hour clock. Hours are numbered 1–12. Corresponds to 'h' in patterns. */
+    /** The typical 12-hour clock. Hours are numbered 1–12. Corresponds to "h" in patterns. */
     H12("h12"),
 
-    /** The 24-hour clock. Hour are numbered 0–23. Corresponds to 'H' in patterns. */
+    /** The 24-hour clock. Hour are numbered 0–23. Corresponds to "H" in patterns. */
     H23("h23"),
 
-    /** Variant of the 12-hour clock, sometimes used in Japan. Hours are numbered 0–11. Corresponds to 'K' in patterns. */
+    /** Variant of the 12-hour clock, sometimes used in Japan. Hours are numbered 0–11. Corresponds to "K" in patterns. */
     H11("h11"),
     ;
 
