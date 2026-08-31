@@ -1,4 +1,4 @@
-// port-lint: tests preferences/locale.rs
+// port-lint: tests icu_locale_core/src/preferences/locale.rs
 package io.github.kotlinmania.iculocalecore.preferences
 
 // This file is part of ICU4X. For terms of use, please see the file

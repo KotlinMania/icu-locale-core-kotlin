@@ -1,4 +1,4 @@
-// port-lint: source extensions/unicode/subdivision.rs
+// port-lint: source icu_locale_core/src/extensions/unicode/subdivision.rs
 package io.github.kotlinmania.iculocalecore.extensions.unicode
 
 // This file is part of ICU4X. For terms of use, please see the file

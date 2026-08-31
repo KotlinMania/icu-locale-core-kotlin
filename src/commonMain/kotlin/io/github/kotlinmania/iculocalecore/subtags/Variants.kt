@@ -1,4 +1,4 @@
-// port-lint: source subtags/variants.rs
+// port-lint: source icu_locale_core/src/subtags/variants.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 // This file is part of ICU4X. For terms of use, please see the file
