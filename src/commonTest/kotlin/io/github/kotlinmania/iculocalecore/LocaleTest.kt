@@ -1,4 +1,4 @@
-// port-lint: tests locale.rs, icu_locale_core/src/extensions/mod.rs, icu_locale_core/src/parser/locale.rs
+// port-lint: tests icu_locale_core/src/locale.rs, icu_locale_core/src/extensions/mod.rs, icu_locale_core/src/parser/locale.rs
 package io.github.kotlinmania.iculocalecore
 
 import io.github.kotlinmania.iculocalecore.extensions.unicode.Key

@@ -1,4 +1,4 @@
-// port-lint: tests shortvec/litemap.rs
+// port-lint: tests icu_locale_core/src/shortvec/litemap.rs
 package io.github.kotlinmania.iculocalecore.shortvec
 
 import kotlin.test.Test

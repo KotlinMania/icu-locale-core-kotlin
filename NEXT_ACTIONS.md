@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 52/63 (82.5%)
-- **Function parity:** 145/301 matched (target 585) — 48.2%
-- **Class/type parity:** 24/57 matched (target 92) — 42.1%
-- **Combined symbol parity:** 169/358 matched (target 677) — 47.2%
+- **Files Present:** 53/73 (72.6%)
+- **Function parity:** 145/341 matched (target 585) — 42.5%
+- **Class/type parity:** 24/71 matched (target 92) — 33.8%
+- **Combined symbol parity:** 169/412 matched (target 677) — 41.0%
 - **Average inline-code cosine:** 0.10 (function body across 42 matched files)
 - **Average documentation cosine:** 0.72 (doc text across 42 matched files)
-- **Cheat-zeroed Files:** 38
-- **Critical Issues:** 52 files with <0.60 function similarity
+- **Cheat-zeroed Files:** 39
+- **Critical Issues:** 53 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -22,19 +22,19 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **macros.enum_keyword** (13 deps)
-   - Path: `preferences/extensions/unicode/macros/enum_keyword.rs`
+   - Path: `icu_locale_core/src/preferences/extensions/unicode/macros/enum_keyword.rs`
    - Essential for 13 other files
 
 ## Detailed Work Items
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. locale
+### 1. icu_locale_core.locale
 
 - **Target:** `iculocalecore.Locale [ZERO]`
 - **Similarity:** 0.00
-- **Dependents:** 4
-- **Priority Score:** 4081710.0
+- **Dependents:** 5
+- **Priority Score:** 5081710.0
 - **Functions:** 8/15 matched (target 14)
 - **Missing functions:** `test_sizes`, `as_tuple`, `try_from_utf8_with_single_variant_single_keyword_unicode_extension`, `from_str`, `from`, `fmt`, `test_writeable`
 - **Types:** 1/2 matched (target 1)
@@ -200,7 +200,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `ShortBoxSliceInner`, `Target`, `ShortBoxSliceIntoIter`, `ShortBoxSliceIntoIterInner`, `Item`, `IntoIter`
 - **Tests:** 0/2 matched
 
-### 16. data
+### 16. icu_locale_core.data
 
 - **Target:** `iculocalecore.DataLocale`
 - **Similarity:** 0.09
@@ -212,7 +212,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`, `TestCase`
 - **Tests:** 0/2 matched
 
-### 17. langid
+### 17. icu_locale_core.langid
 
 - **Target:** `iculocalecore.LanguageIdentifier [ZERO]`
 - **Similarity:** 0.00
@@ -322,18 +322,15 @@ Every matched file is listed below with function and type symbol parity.
 
 ### 26. extensions.mod
 
-- **Target:** `extensions.Extensions [STUB] [PROVENANCE-FALLBACK]`
+- **Target:** `extensions.Extensions [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 31410.0
-- **Functions:** 9/12 matched (target 27)
+- **Functions:** 9/12 matched (target 11)
 - **Missing functions:** `new`, `as_tuple`, `test_writeable`
-- **Types:** 2/2 matched (target 7)
+- **Types:** 2/2 matched (target 6)
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only by basename: `tests:preferences/extensions/unicode/keywords/mod.rs` vs expected `extensions/mod.rs`
-- **Proposed provenance header:** `// port-lint: tests extensions/mod.rs` (current: `// port-lint: tests preferences/extensions/unicode/keywords/mod.rs`)
-- **Lint issues:** 1
 
 ### 27. preferences.locale
 
@@ -425,7 +422,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 35. lib
+### 35. icu_locale_core.lib
 
 - **Target:** `iculocalecore.Lib [STUB]`
 - **Similarity:** 0.00
@@ -436,9 +433,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 36. keywords.variant
+### 36. keywords.emoji
 
-- **Target:** `keywords.Variant [ZERO]`
+- **Target:** `keywords.Emoji [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -447,13 +444,13 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 37. keywords.timezone
+### 37. keywords.variant
 
-- **Target:** `keywords.Timezone [ZERO]`
+- **Target:** `keywords.Variant [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
+- **Functions:** 0/0 matched (target 7)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -480,7 +477,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 40. keywords.first_day
+### 40. keywords.timezone
+
+- **Target:** `keywords.Timezone [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 41. keywords.first_day
 
 - **Target:** `keywords.FirstDay [ZERO]`
 - **Similarity:** 0.00
@@ -491,7 +499,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 41. keywords.collation
+### 42. keywords.collation
 
 - **Target:** `keywords.Collation [ZERO]`
 - **Similarity:** 0.00
@@ -500,17 +508,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Functions:** 0/0 matched (target 21)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 3)
-- **Missing types:** _none_
-
-### 42. keywords.line_break
-
-- **Target:** `keywords.LineBreak [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
 ### 43. keywords.hour_cycle
@@ -524,9 +521,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 44. keywords.line_break_word
+### 44. keywords.line_break
 
-- **Target:** `keywords.LineBreakWord [ZERO]`
+- **Target:** `keywords.LineBreak [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -535,9 +532,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 45. keywords.emoji
+### 45. keywords.line_break_word
 
-- **Target:** `keywords.Emoji [ZERO]`
+- **Target:** `keywords.LineBreakWord [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -557,7 +554,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 47. keywords.numbering_system
+### 47. keywords.mod
+
+- **Target:** `keywords.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 16)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 48. keywords.numbering_system
 
 - **Target:** `keywords.NumberingSystem [ZERO]`
 - **Similarity:** 0.00
@@ -568,7 +576,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 48. keywords.dictionary_break
+### 49. keywords.dictionary_break
 
 - **Target:** `keywords.DictionaryBreak [ZERO]`
 - **Similarity:** 0.00
@@ -579,7 +587,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 49. keywords.measurement_system
+### 50. keywords.measurement_system
 
 - **Target:** `keywords.MeasurementSystem [ZERO]`
 - **Similarity:** 0.00
@@ -590,7 +598,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 50. keywords.sentence_supression
+### 51. keywords.sentence_supression
 
 - **Target:** `keywords.SentenceSupression [ZERO]`
 - **Similarity:** 0.00
@@ -601,7 +609,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 51. transform.key
+### 52. transform.key
 
 - **Target:** `transform.Key [ZERO]`
 - **Similarity:** 0.00
@@ -612,7 +620,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 52. keywords.measurement_unit_override
+### 53. keywords.measurement_unit_override
 
 - **Target:** `keywords.MeasurementUnitOverride [ZERO]`
 - **Similarity:** 0.00

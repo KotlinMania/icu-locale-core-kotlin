@@ -1,4 +1,4 @@
-// port-lint: source data.rs
+// port-lint: source icu_locale_core/src/data.rs
 package io.github.kotlinmania.iculocalecore
 
 // This file is part of ICU4X. For terms of use, please see the file
