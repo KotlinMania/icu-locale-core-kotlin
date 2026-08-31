@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 53/63 (84.1%)
-- **Function parity:** 92/194 matched (target 449) — 47.4%
-- **Class/type parity:** 15/35 matched (target 73) — 42.9%
-- **Combined symbol parity:** 107/229 matched (target 522) — 46.7%
+- **Files Present:** 53/73 (72.6%)
+- **Function parity:** 145/341 matched (target 585) — 42.5%
+- **Class/type parity:** 24/71 matched (target 91) — 33.8%
+- **Combined symbol parity:** 169/412 matched (target 676) — 41.0%
 - **Average inline-code cosine:** 0.13 (function body across 42 matched files)
 - **Average documentation cosine:** 0.72 (doc text across 42 matched files)
-- **Cheat-zeroed Files:** 23
+- **Cheat-zeroed Files:** 33
 - **Critical Issues:** 52 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -22,19 +22,19 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **macros.enum_keyword** (13 deps)
-   - Path: `preferences/extensions/unicode/macros/enum_keyword.rs`
+   - Path: `icu_locale_core/src/preferences/extensions/unicode/macros/enum_keyword.rs`
    - Essential for 13 other files
 
 ## Detailed Work Items
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. locale
+### 1. icu_locale_core.locale
 
 - **Target:** `iculocalecore.Locale`
 - **Similarity:** 0.25
-- **Dependents:** 4
-- **Priority Score:** 4081707.5
+- **Dependents:** 5
+- **Priority Score:** 5081707.5
 - **Functions:** 8/15 matched (target 14)
 - **Missing functions:** `test_sizes`, `as_tuple`, `try_from_utf8_with_single_variant_single_keyword_unicode_extension`, `from_str`, `from`, `fmt`, `test_writeable`
 - **Types:** 1/2 matched (target 1)
@@ -188,7 +188,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 15. data
+### 15. shortvec.mod
+
+- **Target:** `shortvec.ShortBoxSlice [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 202810.0
+- **Functions:** 7/21 matched (target 25)
+- **Missing functions:** `default`, `new`, `new_single`, `new_double`, `len`, `remove`, `deref`, `deref_mut`, `from`, `from_iter`, `next`, `into_iter`, `test_new_single_const`, `test_get_single`
+- **Types:** 1/7 matched (target 2)
+- **Missing types:** `ShortBoxSliceInner`, `Target`, `ShortBoxSliceIntoIter`, `ShortBoxSliceIntoIterInner`, `Item`, `IntoIter`
+- **Tests:** 0/2 matched
+
+### 16. icu_locale_core.data
 
 - **Target:** `iculocalecore.DataLocale`
 - **Similarity:** 0.09
@@ -200,7 +212,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`, `TestCase`
 - **Tests:** 0/2 matched
 
-### 16. langid
+### 17. icu_locale_core.langid
 
 - **Target:** `iculocalecore.LanguageIdentifier`
 - **Similarity:** 0.19
@@ -212,7 +224,79 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`
 - **Tests:** 0/1 matched
 
-### 17. unicode.subdivision
+### 18. subtags.mod
+
+- **Target:** `subtags.Subtag [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 91010.0
+- **Functions:** 1/9 matched (target 10)
+- **Missing functions:** `len`, `from_tinystr_unvalidated`, `as_tinystr`, `to_ascii_lowercase`, `try_from`, `eq`, `test_subtag`, `test_subtag_from_tinystr`
+- **Types:** 0/1 matched
+- **Missing types:** `Error`
+- **Tests:** 0/2 matched
+
+### 19. private.mod
+
+- **Target:** `private.Private [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 81610.0
+- **Functions:** 7/13 matched (target 17)
+- **Missing functions:** `new`, `from_str`, `write_to`, `writeable_length_hint`, `deref`, `test_private_extension_fromstr`
+- **Types:** 1/3 matched (target 1)
+- **Missing types:** `Err`, `Target`
+- **Tests:** 0/1 matched
+
+### 20. unicode.mod
+
+- **Target:** `unicode.Unicode [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71610.0
+- **Functions:** 8/14 matched (target 13)
+- **Missing functions:** `new`, `as_tuple`, `from_str`, `write_to`, `writeable_length_hint`, `test_unicode_extension_fromstr`
+- **Types:** 1/2 matched (target 1)
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 21. transform.mod
+
+- **Target:** `transform.Transform [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71510.0
+- **Functions:** 7/13 matched (target 12)
+- **Missing functions:** `new`, `as_tuple`, `from_str`, `write_to`, `writeable_length_hint`, `test_transform_extension_fromstr`
+- **Types:** 1/2 matched (target 1)
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 22. parser.mod
+
+- **Target:** `parser.SubtagIterator [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71110.0
+- **Functions:** 3/9 matched (target 10)
+- **Missing functions:** `new`, `next_const`, `slice_to_str`, `subtag_iterator_peek_test`, `subtag_iterator_test`, `skip_before_separator_test`
+- **Types:** 1/2 matched
+- **Missing types:** `Item`
+- **Tests:** 0/4 matched
+
+### 23. other.mod
+
+- **Target:** `other.Other [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 51510.0
+- **Functions:** 9/13 matched (target 20)
+- **Missing functions:** `from_str`, `write_to`, `writeable_length_hint`, `test_other_extension_fromstr`
+- **Types:** 1/2 matched
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 24. unicode.subdivision
 
 - **Target:** `unicode.SubdivisionId`
 - **Similarity:** 0.32
@@ -224,7 +308,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`
 - **Tests:** 0/1 matched
 
-### 18. transform.value
+### 25. transform.value
 
 - **Target:** `transform.Value`
 - **Similarity:** 0.40
@@ -236,7 +320,19 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** `Err`
 - **Tests:** 0/2 matched
 
-### 19. preferences.locale
+### 26. extensions.mod
+
+- **Target:** `extensions.Extensions [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 31410.0
+- **Functions:** 9/12 matched (target 11)
+- **Missing functions:** `new`, `as_tuple`, `test_writeable`
+- **Types:** 2/2 matched (target 6)
+- **Missing types:** _none_
+- **Tests:** 0/1 matched
+
+### 27. preferences.locale
 
 - **Target:** `preferences.LocalePreferences`
 - **Similarity:** 0.47
@@ -247,7 +343,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 20. parser.langid
+### 28. parser.langid
 
 - **Target:** `parser.LanguageIdParser`
 - **Similarity:** 0.38
@@ -258,7 +354,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 2/2 matched
 - **Missing types:** _none_
 
-### 21. parser.locale
+### 29. preferences.mod
+
+- **Target:** `preferences.PreferenceKey [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10410.0
+- **Functions:** 2/3 matched (target 2)
+- **Missing functions:** `try_from_key_value`
+- **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 30. parser.locale
 
 - **Target:** `parser.LocaleParser`
 - **Similarity:** 0.36
@@ -269,7 +376,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched
 - **Missing types:** _none_
 
-### 22. keywords.region_override
+### 31. keywords.region_override
 
 - **Target:** `keywords.RegionOverride`
 - **Similarity:** 0.00
@@ -281,7 +388,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
 
-### 23. keywords.regional_subdivision
+### 32. keywords.regional_subdivision
 
 - **Target:** `keywords.RegionalSubdivision`
 - **Similarity:** 0.00
@@ -293,7 +400,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
 
-### 24. parser.errors
+### 33. parser.errors
 
 - **Target:** `parser.Errors [ZERO]`
 - **Similarity:** 0.00
@@ -304,7 +411,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 3)
 - **Missing types:** _none_
 
-### 25. unicode.errors
+### 34. unicode.errors
 
 - **Target:** `unicode.Errors [ZERO]`
 - **Similarity:** 0.00
@@ -315,18 +422,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 26. keywords.measurement_unit_override
-
-- **Target:** `keywords.MeasurementUnitOverride [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 27. keywords.emoji
+### 35. keywords.emoji
 
 - **Target:** `keywords.Emoji [ZERO]`
 - **Similarity:** 0.00
@@ -337,7 +433,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 28. keywords.variant
+### 36. keywords.variant
 
 - **Target:** `keywords.Variant [ZERO]`
 - **Similarity:** 0.00
@@ -348,29 +444,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 29. keywords.first_day
-
-- **Target:** `keywords.FirstDay [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 30. keywords.timezone
-
-- **Target:** `keywords.Timezone [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 31. keywords.calendar
+### 37. keywords.calendar
 
 - **Target:** `keywords.Calendar [ZERO]`
 - **Similarity:** 0.00
@@ -381,7 +455,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 16)
 - **Missing types:** _none_
 
-### 32. keywords.currency
+### 38. keywords.currency
 
 - **Target:** `keywords.Currency [ZERO]`
 - **Similarity:** 0.00
@@ -392,9 +466,20 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 33. keywords.line_break
+### 39. keywords.timezone
 
-- **Target:** `keywords.LineBreak [ZERO]`
+- **Target:** `keywords.Timezone [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 40. keywords.first_day
+
+- **Target:** `keywords.FirstDay [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -403,18 +488,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 34. keywords.hour_cycle
-
-- **Target:** `keywords.HourCycle [ZERO]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-
-### 35. keywords.collation
+### 41. keywords.collation
 
 - **Target:** `keywords.Collation [ZERO]`
 - **Similarity:** 0.00
@@ -425,7 +499,29 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
 
-### 36. keywords.line_break_word
+### 42. keywords.hour_cycle
+
+- **Target:** `keywords.HourCycle [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 7)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 43. keywords.line_break
+
+- **Target:** `keywords.LineBreak [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 7)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 44. keywords.line_break_word
 
 - **Target:** `keywords.LineBreakWord [ZERO]`
 - **Similarity:** 0.00
@@ -436,7 +532,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 37. keywords.currency_format
+### 45. keywords.currency_format
 
 - **Target:** `keywords.CurrencyFormat [ZERO]`
 - **Similarity:** 0.00
@@ -447,7 +543,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 38. keywords.numbering_system
+### 46. keywords.mod
+
+- **Target:** `keywords.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 16)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 47. keywords.numbering_system
 
 - **Target:** `keywords.NumberingSystem [ZERO]`
 - **Similarity:** 0.00
@@ -458,7 +565,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 39. keywords.dictionary_break
+### 48. keywords.dictionary_break
 
 - **Target:** `keywords.DictionaryBreak [ZERO]`
 - **Similarity:** 0.00
@@ -469,7 +576,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 40. keywords.measurement_system
+### 49. keywords.measurement_system
 
 - **Target:** `keywords.MeasurementSystem [ZERO]`
 - **Similarity:** 0.00
@@ -480,7 +587,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 41. keywords.sentence_supression
+### 50. keywords.sentence_supression
 
 - **Target:** `keywords.SentenceSupression [ZERO]`
 - **Similarity:** 0.00
@@ -491,13 +598,24 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 42. transform.key
+### 51. transform.key
 
 - **Target:** `transform.Key [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
 - **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 52. keywords.measurement_unit_override
+
+- **Target:** `keywords.MeasurementUnitOverride [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 7)
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
@@ -522,15 +640,5 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `shortvec.mod` | `shortvec.ShortBoxSlice` | `shortvec/mod` |
-| `subtags.mod` | `subtags.Subtag` | `subtags/mod` |
-| `private.mod` | `private.Private` | `extensions/private/mod` |
-| `unicode.mod` | `unicode.Unicode` | `extensions/unicode/mod` |
-| `transform.mod` | `transform.Transform` | `extensions/transform/mod` |
-| `parser.mod` | `parser.SubtagIterator` | `parser/mod` |
-| `other.mod` | `other.Other` | `extensions/other/mod` |
-| `extensions.mod` | `extensions.Extensions` | `extensions/mod` |
-| `preferences.mod` | `preferences.PreferenceKey` | `preferences/mod` |
-| `keywords.mod` | `keywords.Mod` | `preferences/extensions/unicode/keywords/mod` |
-| `lib` | `iculocalecore.Lib` | `lib` |
+| `icu_locale_core.lib` | `iculocalecore.Lib` | `icu_locale_core/src/lib` |
 

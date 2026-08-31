@@ -1,4 +1,4 @@
-// port-lint: source extensions/transform/fields.rs
+// port-lint: source icu_locale_core/src/extensions/transform/fields.rs
 package io.github.kotlinmania.iculocalecore.extensions.transform
 
 // This file is part of ICU4X. For terms of use, please see the file
