@@ -1,4 +1,4 @@
-// port-lint: tests langid.rs
+// port-lint: tests icu_locale_core/src/langid.rs
 package io.github.kotlinmania.iculocalecore
 
 import io.github.kotlinmania.iculocalecore.subtags.Language
