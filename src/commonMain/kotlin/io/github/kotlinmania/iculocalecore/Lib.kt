@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.iculocalecore
 
 /**

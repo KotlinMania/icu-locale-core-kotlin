@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/subtags/subtag.rs
+// port-lint: tests subtags/subtag.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 import kotlin.test.Test

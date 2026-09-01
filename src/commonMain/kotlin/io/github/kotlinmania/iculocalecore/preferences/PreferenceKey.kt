@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/preferences/mod.rs
+// port-lint: source preferences/mod.rs
 package io.github.kotlinmania.iculocalecore.preferences
 
 // This file is part of ICU4X. For terms of use, please see the file

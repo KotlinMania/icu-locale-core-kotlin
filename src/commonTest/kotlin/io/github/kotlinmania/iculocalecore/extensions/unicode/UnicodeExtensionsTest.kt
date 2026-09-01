@@ -1,4 +1,4 @@
-// port-lint: tests icu_locale_core/src/extensions/unicode/mod.rs, extensions/unicode/key.rs, extensions/unicode/attribute.rs, extensions/unicode/keywords.rs, extensions/unicode/value.rs
+// port-lint: tests extensions/unicode/mod.rs, extensions/unicode/key.rs, extensions/unicode/attribute.rs, extensions/unicode/keywords.rs, extensions/unicode/value.rs
 package io.github.kotlinmania.iculocalecore.extensions.unicode
 
 import kotlin.test.Test

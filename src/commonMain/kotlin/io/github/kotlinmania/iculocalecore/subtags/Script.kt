@@ -1,4 +1,4 @@
-// port-lint: source icu_locale_core/src/subtags/script.rs
+// port-lint: source subtags/script.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
 import io.github.kotlinmania.iculocalecore.parser.ParseError
