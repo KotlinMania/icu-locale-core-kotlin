@@ -59,6 +59,25 @@
     "preferences.extensions.unicode.macros.mod",
     "preferences.extensions.unicode.mod",
     "preferences.extensions.unicode.macros.enum_keyword",
-    "preferences.extensions.unicode.macros.struct_keyword"
+    "preferences.extensions.unicode.macros.struct_keyword",
+    "icu_locale_core/src/lib.rs",
+    "icu_locale_core/src/databake.rs",
+    "icu_locale_core/src/helpers.rs",
+    "icu_locale_core/src/macros.rs",
+    "icu_locale_core/src/serde.rs",
+    "icu_locale_core/src/zerovec.rs",
+    "icu_locale_core/src/subtags/mod.rs",
+    "icu_locale_core/src/preferences/mod.rs",
+    "icu_locale_core/src/parser/mod.rs",
+    "icu_locale_core/src/extensions/mod.rs",
+    "icu_locale_core/src/extensions/unicode/mod.rs",
+    "icu_locale_core/src/extensions/transform/mod.rs",
+    "icu_locale_core/src/extensions/private/mod.rs",
+    "icu_locale_core/src/extensions/other/mod.rs",
+    "icu_locale_core/src/shortvec/mod.rs",
+    "icu_locale_core/src/preferences/extensions/mod.rs",
+    "icu_locale_core/src/preferences/extensions/unicode/keywords/mod.rs",
+    "icu_locale_core/src/preferences/extensions/unicode/macros/mod.rs",
+    "icu_locale_core/src/preferences/extensions/unicode/mod.rs"
   ]
 }

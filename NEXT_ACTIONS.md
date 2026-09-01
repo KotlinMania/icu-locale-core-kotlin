@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 53/63 (84.1%)
-- **Function parity:** 92/194 matched (target 449) — 47.4%
-- **Class/type parity:** 15/35 matched (target 73) — 42.9%
-- **Combined symbol parity:** 107/229 matched (target 522) — 46.7%
+- **Files Present:** 53/73 (72.6%)
+- **Function parity:** 145/329 matched (target 585) — 44.1%
+- **Class/type parity:** 24/69 matched (target 91) — 34.8%
+- **Combined symbol parity:** 169/398 matched (target 676) — 42.5%
 - **Average inline-code cosine:** 0.13 (function body across 42 matched files)
 - **Average documentation cosine:** 0.72 (doc text across 42 matched files)
-- **Cheat-zeroed Files:** 23
+- **Cheat-zeroed Files:** 33
 - **Critical Issues:** 52 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -22,31 +22,28 @@ No incomplete high-dependency files detected.
 Critical missing files (>10 dependencies):
 
 1. **macros.enum_keyword** (13 deps)
-   - Path: `preferences/extensions/unicode/macros/enum_keyword.rs`
+   - Path: `icu_locale_core/src/preferences/extensions/unicode/macros/enum_keyword.rs`
    - Essential for 13 other files
 
 ## Detailed Work Items
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. locale
+### 1. icu_locale_core.locale
 
-- **Target:** `iculocalecore.Locale [PROVENANCE-FALLBACK]`
+- **Target:** `iculocalecore.Locale`
 - **Similarity:** 0.25
-- **Dependents:** 4
-- **Priority Score:** 4081707.5
+- **Dependents:** 5
+- **Priority Score:** 5081707.5
 - **Functions:** 8/15 matched (target 14)
 - **Missing functions:** `test_sizes`, `as_tuple`, `try_from_utf8_with_single_variant_single_keyword_unicode_extension`, `from_str`, `from`, `fmt`, `test_writeable`
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Err`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/locale.rs` vs expected `locale.rs`
-- **Proposed provenance header:** `// port-lint: source locale.rs` (current: `// port-lint: source icu_locale_core/src/locale.rs`)
-- **Lint issues:** 1
 
 ### 2. unicode.value
 
-- **Target:** `unicode.Value [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Value`
 - **Similarity:** 0.49
 - **Dependents:** 4
 - **Priority Score:** 4072605.2
@@ -54,13 +51,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `into_iter`, `from_iter`, `extend`, `from_str`
 - **Types:** 1/4 matched (target 1)
 - **Missing types:** `Item`, `IntoIter`, `Err`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/value.rs` vs expected `extensions/unicode/value.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/value.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/value.rs`)
-- **Lint issues:** 1
 
 ### 3. shortvec.litemap
 
-- **Target:** `shortvec.LiteMap [PROVENANCE-FALLBACK]`
+- **Target:** `shortvec.LiteMap`
 - **Similarity:** 0.00
 - **Dependents:** 3
 - **Priority Score:** 3252510.0
@@ -69,15 +63,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/4 matched (target 3)
 - **Missing types:** `Slice`, `KeyValueIter`, `KeyValueIterMut`, `KeyValueIntoIter`
 - **Tests:** 0/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/shortvec/litemap.rs` vs expected `shortvec/litemap.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/shortvec/litemap.rs` vs expected `shortvec/litemap.rs`
-- **Proposed provenance header:** `// port-lint: source shortvec/litemap.rs` (current: `// port-lint: source icu_locale_core/src/shortvec/litemap.rs`)
-- **Proposed provenance header:** `// port-lint: tests shortvec/litemap.rs` (current: `// port-lint: tests icu_locale_core/src/shortvec/litemap.rs`)
-- **Lint issues:** 2
 
 ### 4. subtags.variants
 
-- **Target:** `subtags.Variants [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Variants`
 - **Similarity:** 0.30
 - **Dependents:** 2
 - **Priority Score:** 2041007.0
@@ -85,15 +74,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `new`, `from_short_slice_unchecked`, `deref`
 - **Types:** 1/2 matched
 - **Missing types:** `Target`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/subtags/variants.rs` vs expected `subtags/variants.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/subtags/variants.rs` vs expected `subtags/variants.rs`
-- **Proposed provenance header:** `// port-lint: source subtags/variants.rs` (current: `// port-lint: source icu_locale_core/src/subtags/variants.rs`)
-- **Proposed provenance header:** `// port-lint: tests subtags/variants.rs` (current: `// port-lint: tests icu_locale_core/src/subtags/variants.rs`)
-- **Lint issues:** 2
 
 ### 5. subtags.region
 
-- **Target:** `subtags.Region [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Region`
 - **Similarity:** 0.27
 - **Dependents:** 2
 - **Priority Score:** 2000107.4
@@ -101,15 +85,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/subtags/region.rs` vs expected `subtags/region.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/subtags/region.rs` vs expected `subtags/region.rs`
-- **Proposed provenance header:** `// port-lint: source subtags/region.rs` (current: `// port-lint: source icu_locale_core/src/subtags/region.rs`)
-- **Proposed provenance header:** `// port-lint: tests subtags/region.rs` (current: `// port-lint: tests icu_locale_core/src/subtags/region.rs`)
-- **Lint issues:** 2
 
 ### 6. unicode.key
 
-- **Target:** `unicode.Key [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Key [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 2
 - **Priority Score:** 2000010.0
@@ -117,13 +96,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/key.rs` vs expected `extensions/unicode/key.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/key.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/key.rs`)
-- **Lint issues:** 1
 
 ### 7. unicode.keywords
 
-- **Target:** `unicode.Keywords [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Keywords`
 - **Similarity:** 0.48
 - **Dependents:** 1
 - **Priority Score:** 1082405.2
@@ -132,13 +108,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Err`
 - **Tests:** 0/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/keywords.rs` vs expected `extensions/unicode/keywords.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/keywords.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/keywords.rs`)
-- **Lint issues:** 1
 
 ### 8. unicode.attributes
 
-- **Target:** `unicode.Attributes [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Attributes`
 - **Similarity:** 0.35
 - **Dependents:** 1
 - **Priority Score:** 1061406.5
@@ -147,13 +120,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 1)
 - **Missing types:** `Err`, `Target`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/attributes.rs` vs expected `extensions/unicode/attributes.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/attributes.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/attributes.rs`)
-- **Lint issues:** 1
 
 ### 9. transform.fields
 
-- **Target:** `transform.Fields [PROVENANCE-FALLBACK]`
+- **Target:** `transform.Fields`
 - **Similarity:** 0.42
 - **Dependents:** 1
 - **Priority Score:** 1051305.8
@@ -162,13 +132,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Inner`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/transform/fields.rs` vs expected `extensions/transform/fields.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/transform/fields.rs` (current: `// port-lint: source icu_locale_core/src/extensions/transform/fields.rs`)
-- **Lint issues:** 1
 
 ### 10. subtags.script
 
-- **Target:** `subtags.Script [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Script`
 - **Similarity:** 0.00
 - **Dependents:** 1
 - **Priority Score:** 1010110.0
@@ -176,15 +143,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `from`
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/subtags/script.rs` vs expected `subtags/script.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/subtags/script.rs` vs expected `subtags/script.rs`
-- **Proposed provenance header:** `// port-lint: source subtags/script.rs` (current: `// port-lint: source icu_locale_core/src/subtags/script.rs`)
-- **Proposed provenance header:** `// port-lint: tests subtags/script.rs` (current: `// port-lint: tests icu_locale_core/src/subtags/script.rs`)
-- **Lint issues:** 2
 
 ### 11. subtags.language
 
-- **Target:** `subtags.Language [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Language`
 - **Similarity:** 0.64
 - **Dependents:** 1
 - **Priority Score:** 1000103.6
@@ -192,15 +154,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/subtags/language.rs` vs expected `subtags/language.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/subtags/language.rs` vs expected `subtags/language.rs`
-- **Proposed provenance header:** `// port-lint: source subtags/language.rs` (current: `// port-lint: source icu_locale_core/src/subtags/language.rs`)
-- **Proposed provenance header:** `// port-lint: tests subtags/language.rs` (current: `// port-lint: tests icu_locale_core/src/subtags/language.rs`)
-- **Lint issues:** 2
 
 ### 12. private.other
 
-- **Target:** `private.PrivateSubtag [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `private.PrivateSubtag [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 1
 - **Priority Score:** 1000010.0
@@ -208,13 +165,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/private/other.rs` vs expected `extensions/private/other.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/private/other.rs` (current: `// port-lint: source icu_locale_core/src/extensions/private/other.rs`)
-- **Lint issues:** 1
 
 ### 13. subtags.variant
 
-- **Target:** `subtags.Variant [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Variant [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 1
 - **Priority Score:** 1000010.0
@@ -222,15 +176,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/subtags/variant.rs` vs expected `subtags/variant.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/subtags/variant.rs` vs expected `subtags/variant.rs`
-- **Proposed provenance header:** `// port-lint: source subtags/variant.rs` (current: `// port-lint: source icu_locale_core/src/subtags/variant.rs`)
-- **Proposed provenance header:** `// port-lint: tests subtags/variant.rs` (current: `// port-lint: tests icu_locale_core/src/subtags/variant.rs`)
-- **Lint issues:** 2
 
 ### 14. unicode.attribute
 
-- **Target:** `unicode.Attribute [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Attribute [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 1
 - **Priority Score:** 1000010.0
@@ -238,13 +187,22 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/attribute.rs` vs expected `extensions/unicode/attribute.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/attribute.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/attribute.rs`)
-- **Lint issues:** 1
 
-### 15. data
+### 15. shortvec.mod
 
-- **Target:** `iculocalecore.DataLocale [PROVENANCE-FALLBACK]`
+- **Target:** `shortvec.ShortBoxSlice [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 202810.0
+- **Functions:** 7/21 matched (target 25)
+- **Missing functions:** `default`, `new`, `new_single`, `new_double`, `len`, `remove`, `deref`, `deref_mut`, `from`, `from_iter`, `next`, `into_iter`, `test_new_single_const`, `test_get_single`
+- **Types:** 1/7 matched (target 2)
+- **Missing types:** `ShortBoxSliceInner`, `Target`, `ShortBoxSliceIntoIter`, `ShortBoxSliceIntoIterInner`, `Item`, `IntoIter`
+- **Tests:** 0/2 matched
+
+### 16. icu_locale_core.data
+
+- **Target:** `iculocalecore.DataLocale`
 - **Similarity:** 0.09
 - **Dependents:** 0
 - **Priority Score:** 121709.1
@@ -253,15 +211,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/3 matched (target 2)
 - **Missing types:** `Err`, `TestCase`
 - **Tests:** 0/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/data.rs` vs expected `data.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/data.rs` vs expected `data.rs`
-- **Proposed provenance header:** `// port-lint: source data.rs` (current: `// port-lint: source icu_locale_core/src/data.rs`)
-- **Proposed provenance header:** `// port-lint: tests data.rs` (current: `// port-lint: tests icu_locale_core/src/data.rs`)
-- **Lint issues:** 2
 
-### 16. langid
+### 17. icu_locale_core.langid
 
-- **Target:** `iculocalecore.LanguageIdentifier [PROVENANCE-FALLBACK]`
+- **Target:** `iculocalecore.LanguageIdentifier`
 - **Similarity:** 0.19
 - **Dependents:** 0
 - **Priority Score:** 112008.1
@@ -270,15 +223,82 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched
 - **Missing types:** `Err`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/langid.rs` vs expected `langid.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/langid.rs` vs expected `langid.rs`
-- **Proposed provenance header:** `// port-lint: source langid.rs` (current: `// port-lint: source icu_locale_core/src/langid.rs`)
-- **Proposed provenance header:** `// port-lint: tests langid.rs` (current: `// port-lint: tests icu_locale_core/src/langid.rs`)
-- **Lint issues:** 2
 
-### 17. unicode.subdivision
+### 18. subtags.mod
 
-- **Target:** `unicode.SubdivisionId [PROVENANCE-FALLBACK]`
+- **Target:** `subtags.Subtag [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 91010.0
+- **Functions:** 1/9 matched (target 10)
+- **Missing functions:** `len`, `from_tinystr_unvalidated`, `as_tinystr`, `to_ascii_lowercase`, `try_from`, `eq`, `test_subtag`, `test_subtag_from_tinystr`
+- **Types:** 0/1 matched
+- **Missing types:** `Error`
+- **Tests:** 0/2 matched
+
+### 19. private.mod
+
+- **Target:** `private.Private [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 81610.0
+- **Functions:** 7/13 matched (target 17)
+- **Missing functions:** `new`, `from_str`, `write_to`, `writeable_length_hint`, `deref`, `test_private_extension_fromstr`
+- **Types:** 1/3 matched (target 1)
+- **Missing types:** `Err`, `Target`
+- **Tests:** 0/1 matched
+
+### 20. unicode.mod
+
+- **Target:** `unicode.Unicode [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71610.0
+- **Functions:** 8/14 matched (target 13)
+- **Missing functions:** `new`, `as_tuple`, `from_str`, `write_to`, `writeable_length_hint`, `test_unicode_extension_fromstr`
+- **Types:** 1/2 matched (target 1)
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 21. transform.mod
+
+- **Target:** `transform.Transform [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71510.0
+- **Functions:** 7/13 matched (target 12)
+- **Missing functions:** `new`, `as_tuple`, `from_str`, `write_to`, `writeable_length_hint`, `test_transform_extension_fromstr`
+- **Types:** 1/2 matched (target 1)
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 22. parser.mod
+
+- **Target:** `parser.SubtagIterator [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 71110.0
+- **Functions:** 3/9 matched (target 10)
+- **Missing functions:** `new`, `next_const`, `slice_to_str`, `subtag_iterator_peek_test`, `subtag_iterator_test`, `skip_before_separator_test`
+- **Types:** 1/2 matched
+- **Missing types:** `Item`
+- **Tests:** 0/4 matched
+
+### 23. other.mod
+
+- **Target:** `other.Other [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 51510.0
+- **Functions:** 9/13 matched (target 20)
+- **Missing functions:** `from_str`, `write_to`, `writeable_length_hint`, `test_other_extension_fromstr`
+- **Types:** 1/2 matched
+- **Missing types:** `Err`
+- **Tests:** 0/1 matched
+
+### 24. unicode.subdivision
+
+- **Target:** `unicode.SubdivisionId`
 - **Similarity:** 0.32
 - **Dependents:** 0
 - **Priority Score:** 51006.8
@@ -287,13 +307,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched
 - **Missing types:** `Err`
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/unicode/subdivision.rs` vs expected `extensions/unicode/subdivision.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/unicode/subdivision.rs` (current: `// port-lint: source icu_locale_core/src/extensions/unicode/subdivision.rs`)
-- **Lint issues:** 1
 
-### 18. transform.value
+### 25. transform.value
 
-- **Target:** `transform.Value [PROVENANCE-FALLBACK]`
+- **Target:** `transform.Value`
 - **Similarity:** 0.40
 - **Dependents:** 0
 - **Priority Score:** 41106.0
@@ -302,13 +319,22 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/2 matched (target 1)
 - **Missing types:** `Err`
 - **Tests:** 0/2 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/transform/value.rs` vs expected `extensions/transform/value.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/transform/value.rs` (current: `// port-lint: source icu_locale_core/src/extensions/transform/value.rs`)
-- **Lint issues:** 1
 
-### 19. preferences.locale
+### 26. extensions.mod
 
-- **Target:** `preferences.LocalePreferences [PROVENANCE-FALLBACK]`
+- **Target:** `extensions.Extensions [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 31410.0
+- **Functions:** 9/12 matched (target 11)
+- **Missing functions:** `new`, `as_tuple`, `test_writeable`
+- **Types:** 2/2 matched (target 6)
+- **Missing types:** _none_
+- **Tests:** 0/1 matched
+
+### 27. preferences.locale
+
+- **Target:** `preferences.LocalePreferences`
 - **Similarity:** 0.47
 - **Dependents:** 0
 - **Priority Score:** 30905.3
@@ -316,15 +342,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `default`, `language`, `region`
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/locale.rs` vs expected `preferences/locale.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/preferences/locale.rs` vs expected `preferences/locale.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/locale.rs` (current: `// port-lint: source icu_locale_core/src/preferences/locale.rs`)
-- **Proposed provenance header:** `// port-lint: tests preferences/locale.rs` (current: `// port-lint: tests icu_locale_core/src/preferences/locale.rs`)
-- **Lint issues:** 2
 
-### 20. parser.langid
+### 28. parser.langid
 
-- **Target:** `parser.LanguageIdParser [PROVENANCE-FALLBACK]`
+- **Target:** `parser.LanguageIdParser`
 - **Similarity:** 0.38
 - **Dependents:** 0
 - **Priority Score:** 20606.2
@@ -332,13 +353,21 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `parse_locale_with_single_variant_single_keyword_unicode_extension_from_iter`, `parse_language_identifier_with_single_variant`
 - **Types:** 2/2 matched
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/parser/langid.rs` vs expected `parser/langid.rs`
-- **Proposed provenance header:** `// port-lint: source parser/langid.rs` (current: `// port-lint: source icu_locale_core/src/parser/langid.rs`)
-- **Lint issues:** 1
 
-### 21. parser.locale
+### 29. preferences.mod
 
-- **Target:** `parser.LocaleParser [PROVENANCE-FALLBACK]`
+- **Target:** `preferences.PreferenceKey [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10410.0
+- **Functions:** 2/3 matched (target 2)
+- **Missing functions:** `try_from_key_value`
+- **Types:** 1/1 matched
+- **Missing types:** _none_
+
+### 30. parser.locale
+
+- **Target:** `parser.LocaleParser`
 - **Similarity:** 0.36
 - **Dependents:** 0
 - **Priority Score:** 10206.4
@@ -346,13 +375,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `parse_locale_with_single_variant_single_keyword_unicode_keyword_extension`
 - **Types:** 0/0 matched
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/parser/locale.rs` vs expected `parser/locale.rs`
-- **Proposed provenance header:** `// port-lint: source parser/locale.rs` (current: `// port-lint: source icu_locale_core/src/parser/locale.rs`)
-- **Lint issues:** 1
 
-### 22. keywords.region_override
+### 31. keywords.region_override
 
-- **Target:** `keywords.RegionOverride [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.RegionOverride`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10110.0
@@ -361,13 +387,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/region_override.rs` vs expected `preferences/extensions/unicode/keywords/region_override.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/region_override.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/region_override.rs`)
-- **Lint issues:** 1
 
-### 23. keywords.regional_subdivision
+### 32. keywords.regional_subdivision
 
-- **Target:** `keywords.RegionalSubdivision [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.RegionalSubdivision`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10110.0
@@ -376,13 +399,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 - **Tests:** 0/1 matched
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/regional_subdivision.rs` vs expected `preferences/extensions/unicode/keywords/regional_subdivision.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/regional_subdivision.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/regional_subdivision.rs`)
-- **Lint issues:** 1
 
-### 24. parser.errors
+### 33. parser.errors
 
-- **Target:** `parser.Errors [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `parser.Errors [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 110.0
@@ -390,15 +410,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 3)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/parser/errors.rs` vs expected `parser/errors.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/parser/errors.rs` vs expected `parser/errors.rs`
-- **Proposed provenance header:** `// port-lint: source parser/errors.rs` (current: `// port-lint: source icu_locale_core/src/parser/errors.rs`)
-- **Proposed provenance header:** `// port-lint: tests parser/errors.rs` (current: `// port-lint: tests icu_locale_core/src/parser/errors.rs`)
-- **Lint issues:** 2
 
-### 25. unicode.errors
+### 34. unicode.errors
 
-- **Target:** `unicode.Errors [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `unicode.Errors [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 110.0
@@ -406,15 +421,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/errors.rs` vs expected `preferences/extensions/unicode/errors.rs`
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `tests:icu_locale_core/src/preferences/extensions/unicode/errors.rs` vs expected `preferences/extensions/unicode/errors.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/errors.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/errors.rs`)
-- **Proposed provenance header:** `// port-lint: tests preferences/extensions/unicode/errors.rs` (current: `// port-lint: tests icu_locale_core/src/preferences/extensions/unicode/errors.rs`)
-- **Lint issues:** 2
 
-### 26. keywords.emoji
+### 35. keywords.emoji
 
-- **Target:** `keywords.Emoji [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Emoji [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -422,13 +432,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/emoji.rs` vs expected `preferences/extensions/unicode/keywords/emoji.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/emoji.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/emoji.rs`)
-- **Lint issues:** 1
 
-### 27. keywords.variant
+### 36. keywords.variant
 
-- **Target:** `keywords.Variant [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Variant [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -436,41 +443,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/variant.rs` vs expected `preferences/extensions/unicode/keywords/variant.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/variant.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/variant.rs`)
-- **Lint issues:** 1
 
-### 28. keywords.first_day
+### 37. keywords.calendar
 
-- **Target:** `keywords.FirstDay [ZERO] [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/first_day.rs` vs expected `preferences/extensions/unicode/keywords/first_day.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/first_day.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/first_day.rs`)
-- **Lint issues:** 1
-
-### 29. keywords.timezone
-
-- **Target:** `keywords.Timezone [ZERO] [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 6)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/timezone.rs` vs expected `preferences/extensions/unicode/keywords/timezone.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/timezone.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/timezone.rs`)
-- **Lint issues:** 1
-
-### 30. keywords.calendar
-
-- **Target:** `keywords.Calendar [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Calendar [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -478,13 +454,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 16)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/calendar.rs` vs expected `preferences/extensions/unicode/keywords/calendar.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/calendar.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/calendar.rs`)
-- **Lint issues:** 1
 
-### 31. keywords.currency
+### 38. keywords.currency
 
-- **Target:** `keywords.Currency [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Currency [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -492,13 +465,21 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/currency.rs` vs expected `preferences/extensions/unicode/keywords/currency.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/currency.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/currency.rs`)
-- **Lint issues:** 1
 
-### 32. keywords.line_break
+### 39. keywords.timezone
 
-- **Target:** `keywords.LineBreak [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Timezone [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 6)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 40. keywords.first_day
+
+- **Target:** `keywords.FirstDay [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -506,27 +487,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/line_break.rs` vs expected `preferences/extensions/unicode/keywords/line_break.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/line_break.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/line_break.rs`)
-- **Lint issues:** 1
 
-### 33. keywords.hour_cycle
+### 41. keywords.collation
 
-- **Target:** `keywords.HourCycle [ZERO] [PROVENANCE-FALLBACK]`
-- **Similarity:** 0.00
-- **Dependents:** 0
-- **Priority Score:** 10.0
-- **Functions:** 0/0 matched (target 7)
-- **Missing functions:** _none_
-- **Types:** 0/0 matched (target 1)
-- **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/hour_cycle.rs` vs expected `preferences/extensions/unicode/keywords/hour_cycle.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/hour_cycle.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/hour_cycle.rs`)
-- **Lint issues:** 1
-
-### 34. keywords.collation
-
-- **Target:** `keywords.Collation [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.Collation [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -534,13 +498,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 3)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/collation.rs` vs expected `preferences/extensions/unicode/keywords/collation.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/collation.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/collation.rs`)
-- **Lint issues:** 1
 
-### 35. keywords.line_break_word
+### 42. keywords.hour_cycle
 
-- **Target:** `keywords.LineBreakWord [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.HourCycle [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -548,13 +509,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/line_break_word.rs` vs expected `preferences/extensions/unicode/keywords/line_break_word.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/line_break_word.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/line_break_word.rs`)
-- **Lint issues:** 1
 
-### 36. keywords.currency_format
+### 43. keywords.line_break
 
-- **Target:** `keywords.CurrencyFormat [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.LineBreak [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -562,13 +520,43 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/currency_format.rs` vs expected `preferences/extensions/unicode/keywords/currency_format.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/currency_format.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/currency_format.rs`)
-- **Lint issues:** 1
 
-### 37. keywords.numbering_system
+### 44. keywords.line_break_word
 
-- **Target:** `keywords.NumberingSystem [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.LineBreakWord [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 7)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 45. keywords.currency_format
+
+- **Target:** `keywords.CurrencyFormat [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 7)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 46. keywords.mod
+
+- **Target:** `keywords.Mod [STUB]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 16)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched (target 1)
+- **Missing types:** _none_
+
+### 47. keywords.numbering_system
+
+- **Target:** `keywords.NumberingSystem [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -576,13 +564,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/numbering_system.rs` vs expected `preferences/extensions/unicode/keywords/numbering_system.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/numbering_system.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/numbering_system.rs`)
-- **Lint issues:** 1
 
-### 38. keywords.dictionary_break
+### 48. keywords.dictionary_break
 
-- **Target:** `keywords.DictionaryBreak [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.DictionaryBreak [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -590,13 +575,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/dictionary_break.rs` vs expected `preferences/extensions/unicode/keywords/dictionary_break.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/dictionary_break.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/dictionary_break.rs`)
-- **Lint issues:** 1
 
-### 39. keywords.measurement_system
+### 49. keywords.measurement_system
 
-- **Target:** `keywords.MeasurementSystem [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.MeasurementSystem [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -604,13 +586,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/measurement_system.rs` vs expected `preferences/extensions/unicode/keywords/measurement_system.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/measurement_system.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/measurement_system.rs`)
-- **Lint issues:** 1
 
-### 40. keywords.sentence_supression
+### 50. keywords.sentence_supression
 
-- **Target:** `keywords.SentenceSupression [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.SentenceSupression [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -618,13 +597,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/sentence_supression.rs` vs expected `preferences/extensions/unicode/keywords/sentence_supression.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/sentence_supression.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/sentence_supression.rs`)
-- **Lint issues:** 1
 
-### 41. transform.key
+### 51. transform.key
 
-- **Target:** `transform.Key [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `transform.Key [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -632,13 +608,10 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/extensions/transform/key.rs` vs expected `extensions/transform/key.rs`
-- **Proposed provenance header:** `// port-lint: source extensions/transform/key.rs` (current: `// port-lint: source icu_locale_core/src/extensions/transform/key.rs`)
-- **Lint issues:** 1
 
-### 42. keywords.measurement_unit_override
+### 52. keywords.measurement_unit_override
 
-- **Target:** `keywords.MeasurementUnitOverride [ZERO] [PROVENANCE-FALLBACK]`
+- **Target:** `keywords.MeasurementUnitOverride [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10.0
@@ -646,9 +619,6 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** _none_
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
-- **Provenance warning:** port-lint provenance header matched only after fallback normalization: `icu_locale_core/src/preferences/extensions/unicode/keywords/measurement_unit_override.rs` vs expected `preferences/extensions/unicode/keywords/measurement_unit_override.rs`
-- **Proposed provenance header:** `// port-lint: source preferences/extensions/unicode/keywords/measurement_unit_override.rs` (current: `// port-lint: source icu_locale_core/src/preferences/extensions/unicode/keywords/measurement_unit_override.rs`)
-- **Lint issues:** 1
 
 ## Success Criteria
 
@@ -670,15 +640,18 @@ do not treat them as the next implementation target by default.
 
 | Source | Target | Path |
 |--------|--------|------|
-| `shortvec.mod` | `shortvec.ShortBoxSlice` | `shortvec/mod` |
-| `subtags.mod` | `subtags.Subtag` | `subtags/mod` |
-| `private.mod` | `private.Private` | `extensions/private/mod` |
-| `unicode.mod` | `unicode.Unicode` | `extensions/unicode/mod` |
-| `transform.mod` | `transform.Transform` | `extensions/transform/mod` |
-| `parser.mod` | `parser.SubtagIterator` | `parser/mod` |
-| `other.mod` | `other.Other` | `extensions/other/mod` |
-| `extensions.mod` | `extensions.Extensions` | `extensions/mod` |
-| `preferences.mod` | `preferences.PreferenceKey` | `preferences/mod` |
-| `lib` | `iculocalecore.Lib` | `lib` |
-| `keywords.mod` | `keywords.Mod` | `preferences/extensions/unicode/keywords/mod` |
+| `icu_locale_core.lib` | `iculocalecore.Lib` | `icu_locale_core/src/lib` |
+
+### Missing
+
+| Source | Expected target | Deps | Source path | Expected path |
+|--------|-----------------|------|-------------|---------------|
+| `icu_locale_core.databake` | `iculocalecore.src.Databake` | 0 | `icu_locale_core/src/databake.rs` | `iculocalecore/src/Databake.kt` |
+| `icu_locale_core.helpers` | `iculocalecore.src.Helpers` | 0 | `icu_locale_core/src/helpers.rs` | `iculocalecore/src/Helpers.kt` |
+| `icu_locale_core.macros` | `iculocalecore.src.Macros` | 0 | `icu_locale_core/src/macros.rs` | `iculocalecore/src/Macros.kt` |
+| `icu_locale_core.preferences.extensions.mod` | `iculocalecore.src.preferences.extensions.Mod` | 0 | `icu_locale_core/src/preferences/extensions/mod.rs` | `iculocalecore/src/preferences/extensions/Mod.kt` |
+| `macros.mod` | `iculocalecore.src.preferences.extensions.unicode.macros.Mod` | 0 | `icu_locale_core/src/preferences/extensions/unicode/macros/mod.rs` | `iculocalecore/src/preferences/extensions/unicode/macros/Mod.kt` |
+| `icu_locale_core.preferences.extensions.unicode.mod` | `iculocalecore.src.preferences.extensions.unicode.Mod` | 0 | `icu_locale_core/src/preferences/extensions/unicode/mod.rs` | `iculocalecore/src/preferences/extensions/unicode/Mod.kt` |
+| `icu_locale_core.serde` | `iculocalecore.src.Serde` | 0 | `icu_locale_core/src/serde.rs` | `iculocalecore/src/Serde.kt` |
+| `icu_locale_core.zerovec` | `iculocalecore.src.Zerovec` | 0 | `icu_locale_core/src/zerovec.rs` | `iculocalecore/src/Zerovec.kt` |
 
