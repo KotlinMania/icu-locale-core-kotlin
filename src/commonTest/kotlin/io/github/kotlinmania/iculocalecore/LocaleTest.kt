@@ -143,4 +143,49 @@ class LocaleTest {
         val result = Locale.normalizeUtf8("pL-latn-pl-U-HC-H12".encodeToByteArray())
         assertEquals("pl-Latn-PL-u-hc-h12", result.getOrThrow())
     }
+
+    @Test
+    fun testLocaleIsEmpty() {
+        val locale = Locale.UNKNOWN
+        assertTrue(locale.extensions.isEmpty())
+        assertEquals("und", locale.toString())
+    }
+
+    @Test
+    fun testLocaleConversions() {
+        val locale = Locale.UNKNOWN
+        val langid = locale.id
+        val locale2 = langid.toLocale()
+        assertEquals(locale, locale2)
+    }
+
+    @Test
+    fun testLocaleNormalizingEqStr() {
+        val loc = Locale.parse("en-US-u-ca-buddhist").getOrThrow()
+        assertTrue(loc.normalizingEq(loc.toString()))
+        assertTrue(loc.normalizingEq("en-US-u-ca-buddhist"))
+        assertTrue(loc.normalizingEq("EN-us-U-ca-buddhist"))
+
+        val loc2 = Locale.parse("en").getOrThrow()
+        assertFalse(loc2.normalizingEq("en-US"))
+    }
+
+    @Test
+    fun testLocaleStrictCmp() {
+        val loc = Locale.parse("en-US").getOrThrow()
+        assertEquals(0, loc.strictCmp("en-US".encodeToByteArray()))
+        assertTrue(loc.strictCmp("en-GB".encodeToByteArray()) > 0)
+    }
+
+    @Test
+    fun testWriteable() {
+        assertEquals("und", Locale.UNKNOWN.toString())
+        assertEquals("und-001", Locale.parse("und-001").getOrThrow().toString())
+        assertEquals("und-Mymr", Locale.parse("und-Mymr").getOrThrow().toString())
+        assertEquals("my-Mymr-MM", Locale.parse("my-Mymr-MM").getOrThrow().toString())
+        assertEquals("my-Mymr-MM-posix", Locale.parse("my-Mymr-MM-posix").getOrThrow().toString())
+        assertEquals("zh-macos-posix", Locale.parse("zh-macos-posix").getOrThrow().toString())
+        assertEquals("my-t-my-d0-zawgyi", Locale.parse("my-t-my-d0-zawgyi").getOrThrow().toString())
+        assertEquals("ar-SA-u-ca-islamic-civil", Locale.parse("ar-SA-u-ca-islamic-civil").getOrThrow().toString())
+    }
 }
