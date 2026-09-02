@@ -4,6 +4,8 @@ package io.github.kotlinmania.iculocalecore
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
+import io.github.kotlinmania.iculocalecore.subtags.Variant
+import io.github.kotlinmania.iculocalecore.subtags.Variants
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -145,5 +147,70 @@ class LanguageIdentifierTest {
     fun isUnknown() {
         assertTrue(LanguageIdentifier.UNKNOWN.isUnknown())
         assertFalse(LanguageIdentifier.parse("en").getOrThrow().isUnknown())
+    }
+
+    @Test
+    fun testLangidSubtagLanguage() {
+        var lang: Language = Language.parse("en").getOrThrow()
+        assertEquals("en", lang.asString())
+
+        lang = Language.UNKNOWN
+        assertTrue(lang.isUnknown())
+        assertEquals("und", lang.asString())
+    }
+
+    @Test
+    fun testLangidSubtagRegion() {
+        val region: Region = Region.parse("en").getOrThrow()
+        assertEquals("EN", region.asString())
+    }
+
+    @Test
+    fun testLangidSubtagScript() {
+        val script: Script = Script.parse("Latn").getOrThrow()
+        assertEquals("Latn", script.asString())
+    }
+
+    @Test
+    fun testLangidSubtagVariant() {
+        val variant: Variant = Variant.parse("macos").getOrThrow()
+        assertEquals("macos", variant.asString())
+    }
+
+    @Test
+    fun testLangidSubtagVariants() {
+        val variant: Variant = Variant.parse("macos").getOrThrow()
+        val variants = Variants.fromVecUnchecked(listOf(variant))
+        assertEquals(variant, variants.first())
+        assertEquals(1, variants.size())
+    }
+
+    @Test
+    fun testLangidNormalizingEqStr() {
+        val parsed = LanguageIdentifier.parse("eN-latn-Us-macos").getOrThrow()
+        assertTrue(parsed.normalizingEq(parsed.toString()))
+        assertTrue(parsed.normalizingEq("en-Latn-US-macos"))
+        assertTrue(parsed.normalizingEq("EN-LATN-us-MACOS"))
+
+        val lang = LanguageIdentifier.parse("en").getOrThrow()
+        assertFalse(lang.normalizingEq("en-US"))
+    }
+
+    @Test
+    fun testLangidStrictCmp() {
+        val lang = LanguageIdentifier.parse("en-US").getOrThrow()
+        assertEquals(0, lang.strictCmp("en-US".encodeToByteArray()))
+        assertTrue(lang.strictCmp("en-GB".encodeToByteArray()) > 0)
+        assertTrue(lang.strictCmp("en-US-macos".encodeToByteArray()) < 0)
+    }
+
+    @Test
+    fun testWriteable() {
+        assertEquals("und", LanguageIdentifier.UNKNOWN.toString())
+        assertEquals("und-001", LanguageIdentifier.parse("und-001").getOrThrow().toString())
+        assertEquals("und-Mymr", LanguageIdentifier.parse("und-Mymr").getOrThrow().toString())
+        assertEquals("my-Mymr-MM", LanguageIdentifier.parse("my-Mymr-MM").getOrThrow().toString())
+        assertEquals("my-Mymr-MM-posix", LanguageIdentifier.parse("my-Mymr-MM-posix").getOrThrow().toString())
+        assertEquals("zh-macos-posix", LanguageIdentifier.parse("zh-macos-posix").getOrThrow().toString())
     }
 }
