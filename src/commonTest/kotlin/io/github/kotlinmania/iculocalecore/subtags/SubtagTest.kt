@@ -36,6 +36,13 @@ class SubtagTest {
     }
 
     @Test
+    fun len() {
+        val subtag = Subtag.parse("foo").getOrThrow()
+        assertEquals(3, subtag.len())
+        assertEquals(subtag.length(), subtag.len())
+    }
+
+    @Test
     fun normalizingEq() {
         val subtag = Subtag.parse("foo").getOrThrow()
         assertTrue(subtag.normalizingEq("FOO"))

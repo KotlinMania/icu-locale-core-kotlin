@@ -55,6 +55,9 @@ data class Variants(
     /** Empties the [Variants] list. Returns the old list. */
     fun clear(): Variants = EMPTY
 
+    /** Returns the variant list, like Rust's Deref<Target = [Variant]>. */
+    fun deref(): List<Variant> = inner
+
     /** Iterates over the variants. */
     override fun iterator(): Iterator<Variant> = inner.iterator()
 

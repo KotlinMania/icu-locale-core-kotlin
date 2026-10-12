@@ -60,7 +60,10 @@ data class Subtag(
     }
 
     /** Returns the length of this subtag. */
-    fun length(): Int = value.length
+    fun len(): Int = value.length
+
+    /** Alias for [len] for source compatibility. */
+    fun length(): Int = len()
 
     /** A helper function for displaying as a string. */
     fun asString(): String = value

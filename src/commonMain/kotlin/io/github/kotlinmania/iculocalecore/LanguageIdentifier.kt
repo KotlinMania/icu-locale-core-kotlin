@@ -5,7 +5,9 @@ package io.github.kotlinmania.iculocalecore
 // called LICENSE at the top level of the ICU4X source tree
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
+import io.github.kotlinmania.iculocalecore.parser.SingleVariantParseResult
 import io.github.kotlinmania.iculocalecore.parser.parseLanguageIdentifier
+import io.github.kotlinmania.iculocalecore.parser.parseLanguageIdentifierWithSingleVariant
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
@@ -93,6 +95,21 @@ data class LanguageIdentifier(
          */
         fun tryFromLocaleBytes(v: ByteArray): Result<LanguageIdentifier> =
             parseLanguageIdentifier(v, isLocale = true)
+
+        /**
+         * Parses a UTF-8 byte slice that contains at most one variant.
+         *
+         * Kotlin equivalent of Rust's
+         * `LanguageIdentifier::try_from_utf8_with_single_variant`.
+         * Returns the decomposed fields rather than a [LanguageIdentifier],
+         * since the single-variant parse path is used by the `langid!` macro
+         * to construct the struct directly.
+         */
+        fun tryFromUtf8WithSingleVariant(codeUnits: ByteArray): Result<SingleVariantParseResult> =
+            parseLanguageIdentifierWithSingleVariant(
+                codeUnits,
+                io.github.kotlinmania.iculocalecore.parser.ParserMode.LanguageIdentifier,
+            )
     }
 
     /** Whether this [LanguageIdentifier] equals [LanguageIdentifier.UNKNOWN]. */

@@ -213,4 +213,26 @@ class LanguageIdentifierTest {
         assertEquals("my-Mymr-MM-posix", LanguageIdentifier.parse("my-Mymr-MM-posix").getOrThrow().toString())
         assertEquals("zh-macos-posix", LanguageIdentifier.parse("zh-macos-posix").getOrThrow().toString())
     }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantNoVariant() {
+        val result = LanguageIdentifier.tryFromUtf8WithSingleVariant("en-US".encodeToByteArray()).getOrThrow()
+        assertEquals("en", result.language.asString())
+        assertEquals("US", result.region?.asString())
+        assertNull(result.script)
+        assertNull(result.variant)
+    }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantOneVariant() {
+        val result = LanguageIdentifier.tryFromUtf8WithSingleVariant("en-US-valencia".encodeToByteArray()).getOrThrow()
+        assertEquals("en", result.language.asString())
+        assertEquals("US", result.region?.asString())
+        assertEquals("valencia", result.variant?.asString())
+    }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantTwoVariantsFails() {
+        assertTrue(LanguageIdentifier.tryFromUtf8WithSingleVariant("en-US-macos-posix".encodeToByteArray()).isFailure)
+    }
 }

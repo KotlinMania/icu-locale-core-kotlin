@@ -6,8 +6,10 @@ package io.github.kotlinmania.iculocalecore
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 import io.github.kotlinmania.iculocalecore.extensions.Extensions
+import io.github.kotlinmania.iculocalecore.parser.SingleVariantKeywordParseResult
 import io.github.kotlinmania.iculocalecore.parser.SubtagIterator
 import io.github.kotlinmania.iculocalecore.parser.parseLocale
+import io.github.kotlinmania.iculocalecore.parser.parseLocaleWithSingleVariantSingleKeywordUnicodeKeywordExtension
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
@@ -81,6 +83,24 @@ data class Locale(
         /** Normalizes a locale from UTF-8 bytes. */
         fun normalizeUtf8(input: ByteArray): Result<String> =
             tryFromUtf8(input).map { it.toString() }
+
+        /**
+         * Parses a UTF-8 byte slice that contains at most one variant and
+         * at most one unicode keyword extension.
+         *
+         * Kotlin equivalent of Rust's
+         * `Locale::try_from_utf8_with_single_variant_single_keyword_unicode_extension`.
+         * Returns the decomposed fields rather than a [Locale], since the
+         * single-variant parse path is used by the `locale!` macro to
+         * construct the struct directly.
+         */
+        fun tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+            codeUnits: ByteArray,
+        ): Result<SingleVariantKeywordParseResult> =
+            parseLocaleWithSingleVariantSingleKeywordUnicodeKeywordExtension(
+                codeUnits,
+                io.github.kotlinmania.iculocalecore.parser.ParserMode.Locale,
+            )
     }
 
     /** Compare this [Locale] with BCP-47 bytes. */

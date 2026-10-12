@@ -1,6 +1,6 @@
 # port-lint Proposed Changes
 
-**Generated:** 2026-09-02
+**Generated:** 2026-10-12
 **Source:** tmp/icu_locale_core/src
 **Target:** src/commonMain/kotlin
 

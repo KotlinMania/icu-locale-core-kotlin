@@ -47,4 +47,15 @@ class VariantsTest {
         val variants = Variants.fromSortedDeduped(listOf(posix, macos))
         assertEquals("macos", variants.first()?.asString())
     }
+
+    @Test
+    fun deref() {
+        val macos = Variant.parse("macos").getOrThrow()
+        val posix = Variant.parse("posix").getOrThrow()
+        val variants = Variants.fromSortedDeduped(listOf(macos, posix))
+        val list = variants.deref()
+        assertEquals(2, list.size)
+        assertEquals(macos, list[0])
+        assertEquals(posix, list[1])
+    }
 }

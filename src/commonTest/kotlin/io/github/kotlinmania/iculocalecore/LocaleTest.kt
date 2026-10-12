@@ -9,6 +9,8 @@ import io.github.kotlinmania.iculocalecore.subtags.Script
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class LocaleTest {
@@ -187,5 +189,44 @@ class LocaleTest {
         assertEquals("zh-macos-posix", Locale.parse("zh-macos-posix").getOrThrow().toString())
         assertEquals("my-t-my-d0-zawgyi", Locale.parse("my-t-my-d0-zawgyi").getOrThrow().toString())
         assertEquals("ar-SA-u-ca-islamic-civil", Locale.parse("ar-SA-u-ca-islamic-civil").getOrThrow().toString())
+    }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension() {
+        val result =
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-u-ca-buddhist".encodeToByteArray(),
+                ).getOrThrow()
+        assertEquals("en", result.language.asString())
+        assertEquals("US", result.region?.asString())
+        assertNull(result.variant)
+        assertNotNull(result.keyword)
+        val kw = result.keyword
+        assertEquals("ca", kw.key.asString())
+        assertEquals("buddhist", kw.value?.asString())
+    }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantSingleKeywordNoKeyword() {
+        val result =
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-valencia".encodeToByteArray(),
+                ).getOrThrow()
+        assertEquals("en", result.language.asString())
+        assertEquals("US", result.region?.asString())
+        assertEquals("valencia", result.variant?.asString())
+        assertNull(result.keyword)
+    }
+
+    @Test
+    fun tryFromUtf8WithSingleVariantSingleKeywordTwoVariantsFails() {
+        assertTrue(
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-macos-posix".encodeToByteArray(),
+                ).isFailure,
+        )
     }
 }
