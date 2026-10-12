@@ -203,8 +203,8 @@ class LocaleTest {
         assertNull(result.variant)
         assertNotNull(result.keyword)
         val kw = result.keyword
-        assertEquals("ca", kw.first.asString())
-        assertEquals("buddhist", kw.second?.asString())
+        assertEquals("ca", kw.key.asString())
+        assertEquals("buddhist", kw.value?.asString())
     }
 
     @Test

@@ -29,6 +29,14 @@ data class SingleVariantParseResult(
 )
 
 /**
+ * A key-value pair for a single unicode keyword extension in const-context parsing.
+ */
+data class SingleKeyword(
+    val key: Key,
+    val value: Subtag?,
+)
+
+/**
  * Result of parsing a locale with at most one variant and one unicode
  * keyword extension (const-context equivalent in Rust, used by the locale! macro).
  */
@@ -37,7 +45,7 @@ data class SingleVariantKeywordParseResult(
     val script: Script?,
     val region: Region?,
     val variant: Variant?,
-    val keyword: Pair<Key, Subtag?>?,
+    val keyword: SingleKeyword?,
 )
 
 enum class ParserMode {
@@ -198,7 +206,7 @@ fun parseLocaleWithSingleVariantSingleKeywordUnicodeExtensionFromIter(
     var script: Script? = null
     var region: Region? = null
     var variant: Variant? = null
-    var keyword: Pair<Key, Subtag?>? = null
+    var keyword: SingleKeyword? = null
 
     var position = ParserPosition.Script
 
@@ -318,7 +326,7 @@ fun parseLocaleWithSingleVariantSingleKeywordUnicodeExtensionFromIter(
                     iter.next()
                 }
 
-                key?.let { keyword = Pair(it, currentType) }
+                key?.let { keyword = SingleKeyword(it, currentType) }
             } else {
                 return Result.failure(ParseException(ParseError.InvalidSubtag))
             }
