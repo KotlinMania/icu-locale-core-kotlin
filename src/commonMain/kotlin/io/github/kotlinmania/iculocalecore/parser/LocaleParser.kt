@@ -6,6 +6,7 @@ package io.github.kotlinmania.iculocalecore.parser
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 import io.github.kotlinmania.iculocalecore.extensions.Extensions
+import io.github.kotlinmania.iculocalecore.parser.SingleVariantKeywordParseResult
 
 /**
  * Parses a locale from a byte array.
@@ -32,4 +33,20 @@ fun parseLocale(t: ByteArray): Result<io.github.kotlinmania.iculocalecore.Locale
         io.github.kotlinmania.iculocalecore
             .Locale(id, extensions),
     )
+}
+
+/**
+ * Parses a locale with at most one variant and at most one unicode keyword
+ * extension from a byte array.
+ *
+ * Kotlin equivalent of Rust's
+ * `parse_locale_with_single_variant_single_keyword_unicode_keyword_extension`.
+ * Delegates to [parseLocaleWithSingleVariantSingleKeywordUnicodeExtensionFromIter].
+ */
+fun parseLocaleWithSingleVariantSingleKeywordUnicodeKeywordExtension(
+    t: ByteArray,
+    mode: ParserMode,
+): Result<SingleVariantKeywordParseResult> {
+    val iter = SubtagIterator(t)
+    return parseLocaleWithSingleVariantSingleKeywordUnicodeExtensionFromIter(iter, mode)
 }
