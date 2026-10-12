@@ -193,9 +193,11 @@ class LocaleTest {
 
     @Test
     fun tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension() {
-        val result = Locale.tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
-            "en-US-u-ca-buddhist".encodeToByteArray(),
-        ).getOrThrow()
+        val result =
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-u-ca-buddhist".encodeToByteArray(),
+                ).getOrThrow()
         assertEquals("en", result.language.asString())
         assertEquals("US", result.region?.asString())
         assertNull(result.variant)
@@ -207,9 +209,11 @@ class LocaleTest {
 
     @Test
     fun tryFromUtf8WithSingleVariantSingleKeywordNoKeyword() {
-        val result = Locale.tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
-            "en-US-valencia".encodeToByteArray(),
-        ).getOrThrow()
+        val result =
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-valencia".encodeToByteArray(),
+                ).getOrThrow()
         assertEquals("en", result.language.asString())
         assertEquals("US", result.region?.asString())
         assertEquals("valencia", result.variant?.asString())
@@ -219,9 +223,10 @@ class LocaleTest {
     @Test
     fun tryFromUtf8WithSingleVariantSingleKeywordTwoVariantsFails() {
         assertTrue(
-            Locale.tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
-                "en-US-macos-posix".encodeToByteArray(),
-            ).isFailure,
+            Locale
+                .tryFromUtf8WithSingleVariantSingleKeywordUnicodeExtension(
+                    "en-US-macos-posix".encodeToByteArray(),
+                ).isFailure,
         )
     }
 }

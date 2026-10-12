@@ -186,11 +186,14 @@ fun parseLocaleWithSingleVariantSingleKeywordUnicodeExtensionFromIter(
     iter: SubtagIterator,
     mode: ParserMode,
 ): Result<SingleVariantKeywordParseResult> {
-    val firstSubtag = iter.next()
-        ?: return Result.failure(ParseException(ParseError.InvalidLanguage))
-    val language = Language.tryFromUtf8(firstSubtag)
-        .onFailure { return Result.failure(it) }
-        .getOrThrow()
+    val firstSubtag =
+        iter.next()
+            ?: return Result.failure(ParseException(ParseError.InvalidLanguage))
+    val language =
+        Language
+            .tryFromUtf8(firstSubtag)
+            .onFailure { return Result.failure(it) }
+            .getOrThrow()
 
     var script: Script? = null
     var region: Region? = null
