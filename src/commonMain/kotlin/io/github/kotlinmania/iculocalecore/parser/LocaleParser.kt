@@ -6,7 +6,6 @@ package io.github.kotlinmania.iculocalecore.parser
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
 import io.github.kotlinmania.iculocalecore.extensions.Extensions
-import io.github.kotlinmania.iculocalecore.parser.SingleVariantKeywordParseResult
 
 /**
  * Parses a locale from a byte array.

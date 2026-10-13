@@ -61,7 +61,7 @@ class Keywords internal constructor(
         fun tryFromIter(iter: SubtagIterator): Result<Keywords> {
             val keywords = LiteMap<Key, Value>()
             var currentKeyword: Key? = null
-            var currentValue: MutableList<Subtag> = mutableListOf()
+            val currentValue = mutableListOf<Subtag>()
 
             while (true) {
                 val subtag = iter.peek() ?: break
@@ -70,7 +70,7 @@ class Keywords internal constructor(
                     val kw = currentKeyword
                     if (kw != null) {
                         keywords.insert(kw, Value.fromShortSliceUnchecked(ShortBoxSlice.fromList(currentValue.toList())))
-                        currentValue = mutableListOf()
+                        currentValue.clear()
                     }
                     val keyResult = Key.tryFromUtf8(subtag)
                     if (keyResult.isFailure) return Result.failure(keyResult.exceptionOrNull()!!)

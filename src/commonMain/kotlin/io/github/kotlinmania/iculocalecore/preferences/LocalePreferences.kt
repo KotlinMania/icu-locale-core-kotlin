@@ -79,11 +79,13 @@ data class LocalePreferences(
     }
 
     private fun toDataLocaleMaybeRegionPriority(regionPriority: Boolean): DataLocale {
+        val r = region
+        val ur = ueRegion
         val effectiveRegion =
-            if (regionPriority && region != null && ueRegion != null) {
-                ueRegion
+            if (regionPriority && r != null && ur != null) {
+                ur
             } else {
-                region
+                r
             }
         return DataLocale(
             language = language,
@@ -140,16 +142,18 @@ data class LocalePreferences(
                 variants = variant?.let { Variants.fromVariant(it) } ?: Variants.EMPTY,
             )
         val ext = Extensions.empty()
-        if (subdivision != null) {
+        val sub = subdivision
+        if (sub != null) {
             ext.unicode.keywords.set(
                 Key("sd"),
-                Value.fromSubtag(subdivision),
+                Value.fromSubtag(sub),
             )
         }
-        if (ueRegion != null) {
+        val uer = ueRegion
+        if (uer != null) {
             ext.unicode.keywords.set(
                 Key("rg"),
-                Value.tryFromStr(ueRegion!!.asString()).getOrThrow(),
+                Value.tryFromStr(uer.asString()).getOrThrow(),
             )
         }
         return Locale(lid, ext)
