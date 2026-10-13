@@ -107,7 +107,7 @@ class Value internal constructor(
     /** Removes and returns the subtag at the given position. */
     fun removeSubtag(idx: Int): Subtag? {
         if (inner.size() <= idx) return null
-        val (newSlice, item) = inner.removeAt(idx)
+        val (_, item) = inner.removeAt(idx)
         return item
     }
 

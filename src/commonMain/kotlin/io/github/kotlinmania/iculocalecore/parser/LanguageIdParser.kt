@@ -79,7 +79,7 @@ fun parseLanguageIdentifierFromIter(
 ): Result<LanguageIdentifier> {
     var script: Script? = null
     var region: Region? = null
-    var variants = mutableListOf<Variant>()
+    val variants = mutableListOf<Variant>()
 
     val firstSubtag =
         iter.next()
@@ -98,8 +98,6 @@ fun parseLanguageIdentifierFromIter(
         if (mode != ParserMode.LanguageIdentifier && subtag.size == 1) {
             break
         }
-
-        val subtagStr = subtag.decodeToString()
 
         if (position == ParserPosition.Script) {
             val scriptResult = Script.tryFromUtf8(subtag)

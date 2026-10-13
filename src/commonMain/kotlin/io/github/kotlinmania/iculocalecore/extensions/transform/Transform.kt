@@ -70,7 +70,7 @@ data class Transform(
             }
 
             var currentTkey: Key? = null
-            var currentTvalue: MutableList<Subtag> = mutableListOf()
+            val currentTvalue = mutableListOf<Subtag>()
             var hasCurrentTvalue = false
 
             while (true) {
@@ -88,7 +88,7 @@ data class Transform(
                         }
                         tfields.insert(tkey, Value.fromShortSliceUnchecked(ShortBoxSlice.fromList(currentTvalue.toList())))
                         currentTkey = null
-                        currentTvalue = mutableListOf()
+                        currentTvalue.clear()
                         hasCurrentTvalue = false
                         continue
                     }

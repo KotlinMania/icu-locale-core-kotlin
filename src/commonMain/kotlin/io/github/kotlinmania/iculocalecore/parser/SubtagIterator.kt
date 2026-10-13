@@ -16,16 +16,6 @@ class SubtagIterator(
 ) {
     private var current: ByteArray? = skipBeforeSeparator(remaining)
 
-    companion object {
-        private fun skipBeforeSeparator(slice: ByteArray): ByteArray {
-            var end = 0
-            while (end < slice.size && slice[end] != '-'.code.toByte()) {
-                end++
-            }
-            return slice.copyOfRange(0, end)
-        }
-    }
-
     /** Returns the current subtag without advancing. */
     fun peek(): ByteArray? = current
 
