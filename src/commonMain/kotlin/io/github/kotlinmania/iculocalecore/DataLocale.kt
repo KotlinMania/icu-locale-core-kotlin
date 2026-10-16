@@ -5,7 +5,9 @@ package io.github.kotlinmania.iculocalecore
 // called LICENSE at the top level of the ICU4X source tree
 // (online at: https://github.com/unicode-org/icu4x/blob/main/LICENSE ).
 
+import io.github.kotlinmania.iculocalecore.extensions.unicode.Key
 import io.github.kotlinmania.iculocalecore.parser.ParseError
+import io.github.kotlinmania.iculocalecore.parser.ParseException
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
@@ -56,20 +58,34 @@ data class DataLocale(
          * Returns [ParseError.InvalidExtension] if the locale contains unsupported extensions.
          */
         fun tryFromUtf8(codeUnits: ByteArray): Result<DataLocale> {
-            // For now, we only support the core language identifier portion.
-            // Full Locale parsing with extension support will be added when
-            // the Locale type is fully ported.
-            val langIdResult = LanguageIdentifier.tryFromUtf8(codeUnits)
-            if (langIdResult.isFailure) return Result.failure(langIdResult.exceptionOrNull()!!)
+            val localeResult = Locale.tryFromUtf8(codeUnits)
+            if (localeResult.isFailure) return Result.failure(localeResult.exceptionOrNull()!!)
+            val locale = localeResult.getOrThrow()
+            if (locale.id.variants.size() > 1 ||
+                !locale.extensions.transform.isEmpty() ||
+                !locale.extensions.private.isEmpty() ||
+                !locale.extensions.other.isEmpty() ||
+                !locale.extensions.unicode.attributes.isEmpty()
+            ) {
+                return Result.failure(ParseException(ParseError.InvalidExtension))
+            }
 
-            val langId = langIdResult.getOrThrow()
+            val unicodeKeywords = locale.extensions.unicode.keywords
+            val unicodeKeywordsCount = unicodeKeywords.inner.size()
+            if (unicodeKeywordsCount != 0 &&
+                (unicodeKeywordsCount != 1 || !unicodeKeywords.containsKey(Key("sd")))
+            ) {
+                return Result.failure(ParseException(ParseError.InvalidExtension))
+            }
+
+            val sd = unicodeKeywords.get(Key("sd"))?.asSingleSubtag()
             return Result.success(
                 DataLocale(
-                    language = langId.language,
-                    script = langId.script,
-                    region = langId.region,
-                    variant = langId.variants.first(),
-                    subdivision = null,
+                    language = locale.id.language,
+                    script = locale.id.script,
+                    region = locale.id.region,
+                    variant = locale.id.variants.first(),
+                    subdivision = sd,
                 ),
             )
         }
@@ -134,6 +150,13 @@ fun LanguageIdentifier.toDataLocale(): DataLocale =
         variant = variants.first(),
         subdivision = null,
     )
+
+/** Convert from a [Locale] to a [DataLocale]. */
+fun Locale.toDataLocale(): DataLocale {
+    val r = id.toDataLocale()
+    val sd = extensions.unicode.keywords.get(Key("sd"))?.asSingleSubtag()
+    return r.copy(subdivision = sd)
+}
 
 private fun <T : Comparable<T>> compareNullable(a: T?, b: T?): Int =
     if (a == null && b == null) {
