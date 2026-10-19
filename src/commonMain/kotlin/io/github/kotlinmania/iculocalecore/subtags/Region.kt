@@ -1,8 +1,15 @@
 // port-lint: source subtags/region.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
+import io.github.kotlinmania.iculocalecore.deserializeRegion
 import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.ParseException
+import io.github.kotlinmania.iculocalecore.serializeRegion
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 // This file is part of ICU4X. For terms of use, please see the file
 // called LICENSE at the top level of the ICU4X source tree
@@ -21,7 +28,11 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  */
 data class Region(
     val value: String,
-) : Comparable<Region> {
+) : Comparable<Region>,
+    Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeRegion(this, serializer)
+
     init {
         require(value.length == 2 || value.length == 3) {
             "Invalid region length: $value"
@@ -37,7 +48,10 @@ data class Region(
         }
     }
 
-    companion object {
+    companion object : Deserialize<Region> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<Region> =
+            deserializeRegion(deserializer)
+
         /**
          * Parses a string into a well-formed [Region], normalizing case.
          * 2-letter regions are uppercased; 3-letter regions stay numeric.

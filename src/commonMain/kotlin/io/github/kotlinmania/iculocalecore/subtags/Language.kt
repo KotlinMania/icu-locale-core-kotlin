@@ -1,8 +1,15 @@
 // port-lint: source subtags/language.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
+import io.github.kotlinmania.iculocalecore.deserializeLanguage
 import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.ParseException
+import io.github.kotlinmania.iculocalecore.serializeLanguage
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 // This file is part of ICU4X. For terms of use, please see the file
 // called LICENSE at the top level of the ICU4X source tree
@@ -33,7 +40,11 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  */
 data class Language(
     val value: String,
-) : Comparable<Language> {
+) : Comparable<Language>,
+    Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeLanguage(this, serializer)
+
     init {
         require(value.length in 2..3 && value.all { it.isLowerCase() && it.isLetter() }) {
             "Invalid language: $value"
@@ -41,7 +52,10 @@ data class Language(
     }
 
     /** The unknown language "und". */
-    companion object {
+    companion object : Deserialize<Language> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<Language> =
+            deserializeLanguage(deserializer)
+
         val UNKNOWN: Language = Language("und")
 
         /**

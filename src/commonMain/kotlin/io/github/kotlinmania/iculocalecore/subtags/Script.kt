@@ -1,8 +1,15 @@
 // port-lint: source subtags/script.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
+import io.github.kotlinmania.iculocalecore.deserializeScript
 import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.ParseException
+import io.github.kotlinmania.iculocalecore.serializeScript
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 // This file is part of ICU4X. For terms of use, please see the file
 // called LICENSE at the top level of the ICU4X source tree
@@ -21,7 +28,11 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  */
 data class Script(
     val value: String,
-) : Comparable<Script> {
+) : Comparable<Script>,
+    Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeScript(this, serializer)
+
     init {
         require(value.length == 4 && value.all { it.isLetter() }) {
             "Invalid script: $value"
@@ -31,7 +42,10 @@ data class Script(
         }
     }
 
-    companion object {
+    companion object : Deserialize<Script> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<Script> =
+            deserializeScript(deserializer)
+
         /**
          * Parses a string into a well-formed [Script], normalizing to titlecase.
          * Returns [ParseError.InvalidSubtag] if the string is not a valid script subtag.
