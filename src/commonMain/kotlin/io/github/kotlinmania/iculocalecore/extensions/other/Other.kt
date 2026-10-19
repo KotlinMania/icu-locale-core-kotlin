@@ -1,4 +1,3 @@
-// port-lint: source extensions/other/mod.rs
 package io.github.kotlinmania.iculocalecore.extensions.other
 
 // This file is part of ICU4X. For terms of use, please see the file

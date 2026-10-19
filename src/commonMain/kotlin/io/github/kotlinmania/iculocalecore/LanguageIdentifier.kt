@@ -12,6 +12,11 @@ import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
 import io.github.kotlinmania.iculocalecore.subtags.Variants
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 /**
  * A core struct representing a Unicode BCP47 Language Identifier.
@@ -58,9 +63,15 @@ data class LanguageIdentifier(
     val region: Region?,
     /** Variant subtags of the language identifier. */
     val variants: Variants,
-) {
+) : Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeLanguageIdentifier(this, serializer)
+
     /** The unknown language identifier "und". */
-    companion object {
+    companion object : Deserialize<LanguageIdentifier> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<LanguageIdentifier> =
+            deserializeLanguageIdentifier(deserializer)
+
         val UNKNOWN: LanguageIdentifier =
             LanguageIdentifier(
                 Language.UNKNOWN,

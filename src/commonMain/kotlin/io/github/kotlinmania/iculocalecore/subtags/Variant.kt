@@ -1,8 +1,15 @@
 // port-lint: source subtags/variant.rs
 package io.github.kotlinmania.iculocalecore.subtags
 
+import io.github.kotlinmania.iculocalecore.deserializeVariant
 import io.github.kotlinmania.iculocalecore.parser.ParseError
 import io.github.kotlinmania.iculocalecore.parser.ParseException
+import io.github.kotlinmania.iculocalecore.serializeVariant
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 // This file is part of ICU4X. For terms of use, please see the file
 // called LICENSE at the top level of the ICU4X source tree
@@ -21,7 +28,11 @@ import io.github.kotlinmania.iculocalecore.parser.ParseException
  */
 data class Variant(
     val value: String,
-) : Comparable<Variant> {
+) : Comparable<Variant>,
+    Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeVariant(this, serializer)
+
     init {
         require(value.length in 4..8 && value.all { it.isLetterOrDigit() && !it.isUpperCase() }) {
             "Invalid variant: $value"
@@ -33,7 +44,10 @@ data class Variant(
         }
     }
 
-    companion object {
+    companion object : Deserialize<Variant> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<Variant> =
+            deserializeVariant(deserializer)
+
         /**
          * Parses a string into a well-formed [Variant], normalizing to lowercase.
          * Returns [ParseError.InvalidSubtag] if the string is not a valid variant subtag.

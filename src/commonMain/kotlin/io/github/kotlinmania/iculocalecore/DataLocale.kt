@@ -65,7 +65,8 @@ data class DataLocale(
                 !locale.extensions.transform.isEmpty() ||
                 !locale.extensions.private.isEmpty() ||
                 !locale.extensions.other.isEmpty() ||
-                !locale.extensions.unicode.attributes.isEmpty()
+                !locale.extensions.unicode.attributes
+                    .isEmpty()
             ) {
                 return Result.failure(ParseException(ParseError.InvalidExtension))
             }
@@ -154,7 +155,10 @@ fun LanguageIdentifier.toDataLocale(): DataLocale =
 /** Convert from a [Locale] to a [DataLocale]. */
 fun Locale.toDataLocale(): DataLocale {
     val r = id.toDataLocale()
-    val sd = extensions.unicode.keywords.get(Key("sd"))?.asSingleSubtag()
+    val sd =
+        extensions.unicode.keywords
+            .get(Key("sd"))
+            ?.asSingleSubtag()
     return r.copy(subdivision = sd)
 }
 

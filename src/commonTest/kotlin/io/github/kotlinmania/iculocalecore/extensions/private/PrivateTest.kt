@@ -1,4 +1,3 @@
-// port-lint: tests extensions/private/mod.rs, extensions/other/mod.rs
 package io.github.kotlinmania.iculocalecore.extensions.private
 
 import kotlin.test.Test

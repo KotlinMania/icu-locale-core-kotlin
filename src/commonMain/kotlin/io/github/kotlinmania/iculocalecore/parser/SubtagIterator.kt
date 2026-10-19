@@ -1,4 +1,3 @@
-// port-lint: source parser/mod.rs
 package io.github.kotlinmania.iculocalecore.parser
 
 // This file is part of ICU4X. For terms of use, please see the file

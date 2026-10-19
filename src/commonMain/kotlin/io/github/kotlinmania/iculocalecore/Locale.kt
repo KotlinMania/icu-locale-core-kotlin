@@ -13,6 +13,11 @@ import io.github.kotlinmania.iculocalecore.parser.parseLocaleWithSingleVariantSi
 import io.github.kotlinmania.iculocalecore.subtags.Language
 import io.github.kotlinmania.iculocalecore.subtags.Region
 import io.github.kotlinmania.iculocalecore.subtags.Script
+import io.github.kotlinmania.serde.SerdeResult
+import io.github.kotlinmania.serdecore.de.Deserialize
+import io.github.kotlinmania.serdecore.de.Deserializer
+import io.github.kotlinmania.serdecore.ser.Serialize
+import io.github.kotlinmania.serdecore.ser.Serializer
 
 /**
  * A core struct representing a Unicode Locale Identifier.
@@ -62,8 +67,14 @@ data class Locale(
     val id: LanguageIdentifier,
     /** Any extensions present in the locale identifier. */
     val extensions: Extensions,
-) {
-    companion object {
+) : Serialize {
+    override fun <Ok> serialize(serializer: Serializer<Ok>): SerdeResult<Ok> =
+        serializeLocale(this, serializer)
+
+    companion object : Deserialize<Locale> {
+        override fun <D : Deserializer> deserialize(deserializer: D): SerdeResult<Locale> =
+            deserializeLocale(deserializer)
+
         /** The unknown locale "und". */
         val UNKNOWN: Locale = Locale(LanguageIdentifier.UNKNOWN, Extensions.empty())
 

@@ -1,4 +1,3 @@
-// port-lint: tests shortvec/mod.rs
 package io.github.kotlinmania.iculocalecore.shortvec
 
 import kotlin.test.Test
